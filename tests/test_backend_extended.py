@@ -122,9 +122,29 @@ def test_recognize_landmarks_endpoint(client):
     assert bad.status_code == 400
 
 
-def test_new_universal_gestures(client):
-    from tests.test_geometric import make_hand
+def make_hand(extended: set, thumb_out: bool = True) -> np.ndarray:
+    pts = np.zeros((21, 3), dtype=float)
+    pts[0] = (0.0, 0.0, 0.0)
+    mcp_x = {5: -0.3, 9: -0.1, 13: 0.1, 17: 0.3}
+    for mcp, x in mcp_x.items():
+        pip, dip, tip = mcp + 1, mcp + 2, mcp + 3
+        pts[mcp] = (x, -1.0, 0.0)
+        if mcp in extended:
+            pts[pip] = (x, -1.5, 0.0)
+            pts[dip] = (x, -2.0, 0.0)
+            pts[tip] = (x, -2.4, 0.0)
+        else:
+            pts[pip] = (x, -1.3, 0.0)
+            pts[dip] = (x, -0.4, 0.0)
+            pts[tip] = (x, 0.3, 0.0)
+    if thumb_out:
+        pts[1], pts[2], pts[3], pts[4] = (-0.45, -0.30, 0.0), (-0.75, -0.35, 0.0), (-1.0, -0.40, 0.0), (-1.2, -0.45, 0.0)
+    else:
+        pts[1], pts[2], pts[3], pts[4] = (-0.45, -0.30, 0.0), (-0.50, -0.50, 0.0), (-0.30, -0.60, 0.0), (-0.10, -0.62, 0.0)
+    return pts
 
+
+def test_new_universal_gestures(client):
     # 1. Test ILY gesture: thumb, index, pinky extended
     ily_pts = make_hand({5, 17}, thumb_out=True)
     res_ily = client.post("/api/recognize/landmarks", json={

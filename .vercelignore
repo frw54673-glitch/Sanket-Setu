@@ -1,0 +1,11 @@
+# Vercel Deployment Ignore
+.git/
+.venv/
+.pytest_cache/
+__pycache__/
+docs/
+tests/
+reports/
+scripts/
+app/assets/*.mp4
+app/assets/*.pptx
