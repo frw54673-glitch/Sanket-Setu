@@ -5,13 +5,5 @@
       "source": "/(.*)",
       "destination": "/api/index.py"
     }
-  ],
-  "functions": {
-    "api/index.py": {
-      "memory": 1024,
-      "maxDuration": 60,
-      "excludeFiles": "{docs/**,tests/**,reports/**,scripts/**,app/assets/*.mp4,app/assets/*.pptx}"
-    }
-  }
+  ]
 }
-

@@ -24,7 +24,11 @@ import threading
 import time
 from typing import Any, Literal
 
-import cv2
+try:
+    import cv2
+except Exception as _cv_err:
+    cv2 = None
+    logging.getLogger("sanket_setu.live").warning("OpenCV cv2 import warning: %s", _cv_err)
 from fastapi import FastAPI, File, HTTPException, UploadFile, WebSocket, WebSocketDisconnect
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse, HTMLResponse, Response
@@ -189,6 +193,8 @@ def _decode_jpeg(encoded: str) -> np.ndarray:
         raise ValueError("Camera frame is too small")
     if width > MAX_FRAME_WIDTH or height > MAX_FRAME_HEIGHT or width * height > MAX_FRAME_WIDTH * MAX_FRAME_HEIGHT:
         raise ValueError("Camera frame dimensions exceed the live-service limit")
+    if cv2 is None:
+        raise ValueError("OpenCV is not available in this environment")
     frame = cv2.imdecode(np.frombuffer(raw, dtype=np.uint8), cv2.IMREAD_COLOR)
     if frame is None or frame.ndim != 3:
         raise ValueError("Invalid JPEG frame")
@@ -576,6 +582,8 @@ def recognize_landmarks(payload: RecognizeLandmarksRequest):
 async def recognize_image_file(file: UploadFile = File(...), engine: Literal["ml", "geometric"] = "ml"):
     """Upload an image file (PNG, JPG, WEBP) for sign recognition."""
     content = await file.read()
+    if cv2 is None:
+        raise HTTPException(status_code=503, detail="OpenCV is not available in this serverless environment.")
     nparr = np.frombuffer(content, np.uint8)
     frame = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
     if frame is None:
