@@ -2,10 +2,28 @@
 from __future__ import annotations
 
 import json
+import os
 from dataclasses import dataclass, field, fields
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[2]
+
+def _find_root() -> Path:
+    env_root = os.getenv("SANKET_SETU_ROOT")
+    if env_root and Path(env_root).is_dir():
+        return Path(env_root).resolve()
+    cwd = Path.cwd()
+    if (cwd / "configs" / "signs.json").exists():
+        return cwd.resolve()
+    for p in Path(__file__).resolve().parents:
+        if (p / "configs" / "signs.json").exists():
+            return p.resolve()
+    var_task = Path("/var/task")
+    if (var_task / "configs" / "signs.json").exists():
+        return var_task.resolve()
+    return Path(__file__).resolve().parents[2]
+
+
+ROOT = _find_root()
 CONFIG_PATH = ROOT / "configs" / "signs.json"
 DATA_CSV = ROOT / "data" / "processed" / "landmarks.csv"
 RAW_DIR = ROOT / "data" / "raw_images"

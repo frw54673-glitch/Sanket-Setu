@@ -54,7 +54,7 @@ from .session_manager import session_manager
 from .speech import SpeechUnavailable, synthesize, transcribe_audio
 
 ROSTER_CSV = ROOT / "data" / "signers.csv"
-APP_DIR = Path(__file__).resolve().parents[2] / "app"
+APP_DIR = ROOT / "app"
 PAGE = APP_DIR / "live.html"
 SIMULATOR_PAGE = APP_DIR / "simulator.html"
 
@@ -90,7 +90,10 @@ app.add_middleware(
 
 app.state.started_at = time.monotonic()
 app.state.active_websockets = 0
-app.mount("/assets", StaticFiles(directory=APP_DIR / "assets"), name="assets")
+
+assets_dir = APP_DIR / "assets"
+if assets_dir.is_dir():
+    app.mount("/assets", StaticFiles(directory=assets_dir), name="assets")
 
 
 # --- Helper utilities ---
@@ -248,7 +251,17 @@ class SignerRegisterRequest(BaseModel):
 
 @app.get("/", response_class=HTMLResponse, include_in_schema=False)
 def home():
-    return PAGE.read_text(encoding="utf-8")
+    if PAGE.exists():
+        return PAGE.read_text(encoding="utf-8")
+    return HTMLResponse(
+        "<h1>Sanket Setu Care Desk</h1>"
+        "<p>Live backend service is running.</p>"
+        "<ul>"
+        "<li><a href='/simulator'>Paired Desk Simulator</a></li>"
+        "<li><a href='/docs'>Interactive OpenAPI Documentation</a></li>"
+        "<li><a href='/health'>Health & Metrics</a></li>"
+        "</ul>"
+    )
 
 
 @app.get("/simulator", response_class=HTMLResponse, tags=["Demo"])
@@ -282,12 +295,13 @@ def web_manifest():
 @app.get("/health", tags=["System"])
 def health():
     """System health check, uptime, and active connection metrics."""
+    started_at = getattr(app.state, "started_at", time.monotonic())
     return {
         "status": "ok",
         "service": "Sanket Setu live recognition",
         "version": "2.0.0",
-        "uptime_seconds": round(time.monotonic() - app.state.started_at, 1),
-        "active_websockets": app.state.active_websockets,
+        "uptime_seconds": round(time.monotonic() - started_at, 1),
+        "active_websockets": getattr(app.state, "active_websockets", 0),
         "active_desk_sessions": len(session_manager._sessions),
     }
 
