@@ -299,6 +299,7 @@ def web_manifest():
 # --- System & Diagnostics Endpoints ---
 
 @app.get("/health", tags=["System"])
+@app.get("/api/health", tags=["System"])
 def health():
     """System health check, uptime, and active connection metrics."""
     started_at = getattr(app.state, "started_at", time.monotonic())
@@ -466,6 +467,7 @@ async def transcribe_audio_endpoint(file: UploadFile = File(...), lang: str = "h
 # --- Recognition REST Endpoints ---
 
 @app.post("/api/recognize/frame", tags=["Recognition"])
+@app.post("/recognize/frame", include_in_schema=False)
 def recognize_frame(payload: RecognizeFrameRequest):
     """Recognize sign from a base64 JPEG image frame."""
     try:
@@ -542,6 +544,7 @@ def recognize_frame(payload: RecognizeFrameRequest):
 
 
 @app.post("/api/recognize/landmarks", tags=["Recognition"])
+@app.post("/recognize/landmarks", include_in_schema=False)
 def recognize_landmarks(payload: RecognizeLandmarksRequest):
     """Directly recognize sign from 21 MediaPipe (x, y, z) landmarks."""
     pts = np.asarray(payload.points, dtype=float)
@@ -712,6 +715,8 @@ def export_session_transcript(session_id: str):
 
 @app.get("/api/signs", tags=["Vocabulary"])
 @app.get("/api/vocabulary", tags=["Vocabulary"])
+@app.get("/signs", include_in_schema=False)
+@app.get("/vocabulary", include_in_schema=False)
 def get_vocabulary():
     """Expose reviewed vocabulary metadata and official video-dictionary references."""
     _, signs = load_signs()

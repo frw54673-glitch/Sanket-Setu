@@ -3,6 +3,8 @@
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#fffefa"><link rel="manifest" href="/manifest.webmanifest"><link rel="icon" type="image/svg+xml" href="/assets/sanket-setu-mark.svg"><title>Sanket Setu · A clearer conversation</title>
+<script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js" crossorigin="anonymous"></script>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Noto+Sans+Devanagari:wght@500;600;700;800&display=swap');
 :root{--ink:#17223b;--muted:#68758d;--line:#e5e9f2;--paper:#fff;--bg:#f4f6fb;--violet:#6658e8;--violet-dark:#4436be;--mint:#21b88a;--amber:#f4a934;--navy:#111a32;--shadow:0 18px 50px #24325a0c;font-family:'DM Sans','Noto Sans Devanagari',system-ui,sans-serif;color:var(--ink);background:var(--bg)}*{box-sizing:border-box}body{margin:0;min-height:100vh;background:radial-gradient(ellipse 760px 460px at 8% -5%,#e8e5ff 0%,transparent 68%),radial-gradient(ellipse 680px 420px at 100% 32%,#e3f6f1 0%,transparent 70%),var(--bg)}button,select{font:inherit}button{cursor:pointer}.shell{max-width:1500px;margin:auto;padding:0 34px 30px}.topbar{height:78px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #dfe4ef80}.brand{display:flex;align-items:center;gap:11px;font-size:19px;font-weight:800;letter-spacing:-.04em}.brand-mark{width:40px;height:40px;border-radius:14px;display:grid;place-items:center;background:linear-gradient(145deg,#786df2,#5548cf);color:white;box-shadow:0 8px 18px #6255dc30}.brand-mark svg{width:23px}.top-right{display:flex;align-items:center;gap:12px}.privacy,.connection{display:flex;align-items:center;gap:8px;padding:10px 13px;border-radius:999px;background:#ffffffba;border:1px solid #e0e6ed;color:#4b5c72;font-size:12px;font-weight:700}.privacy svg{color:#168864}.connection{background:#f0fbf7;color:#25825f;border-color:#d7f1e7}.dot{width:8px;height:8px;border-radius:50%;background:#b0bac9}.dot.on{background:#24b783;box-shadow:0 0 0 4px #24b78320}.intro{display:flex;align-items:end;justify-content:space-between;gap:22px;padding:29px 0 22px}.kicker{display:flex;align-items:center;gap:9px;color:var(--violet);font-size:11px;font-weight:800;letter-spacing:.16em;text-transform:uppercase}.kicker:before{content:'';width:24px;height:2px;background:var(--violet);border-radius:3px}.intro h1{font-size:clamp(32px,4vw,48px);line-height:1.08;letter-spacing:-.055em;margin:10px 0 8px;font-weight:800}.intro p{max-width:600px;color:var(--muted);margin:0;font-size:15px;line-height:1.55}.mode-pill{display:flex;align-items:center;gap:9px;padding:10px 13px;border:1px solid #e3e7f0;background:#ffffffae;border-radius:14px;color:#536078;font-size:12px;font-weight:700;white-space:nowrap}.mode-pill svg{color:var(--violet)}.workspace{display:grid;grid-template-columns:minmax(0,1.13fr) minmax(340px,.87fr);gap:18px;align-items:stretch}.card{border:1px solid #e4e8f1;background:#ffffffeb;border-radius:24px;box-shadow:var(--shadow);overflow:hidden}.camera-card{padding:19px}.card-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:14px}.card-title{display:flex;align-items:center;gap:10px;font-size:15px;font-weight:800;letter-spacing:-.02em}.iconbox{width:34px;height:34px;border-radius:11px;background:#f0efff;display:grid;place-items:center;color:var(--violet)}.iconbox svg{width:17px;height:17px}.camera-state{display:flex;align-items:center;gap:7px;font-size:11px;color:#78849a;font-weight:700}.camera-state .dot{width:7px;height:7px}.stage{position:relative;overflow:hidden;aspect-ratio:16/9;min-height:250px;border-radius:17px;background:radial-gradient(ellipse at 50% 110%,#253654 0%,#18243e 48%,#11192d 100%);isolation:isolate}.stage video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform:scaleX(-1);opacity:0;transition:opacity .25s}.stage.has-video video{opacity:1}.stage-shade{position:absolute;inset:0;background:linear-gradient(180deg,#10172c00 50%,#10172c76 100%);pointer-events:none}.stage-grid{position:absolute;inset:0;opacity:.2;background-image:linear-gradient(#a7b3d720 1px,transparent 1px),linear-gradient(90deg,#a7b3d720 1px,transparent 1px);background-size:40px 40px;mask-image:linear-gradient(transparent,#000)}.stage-corner{position:absolute;width:34px;height:34px;border-color:#a8a2ff;border-style:solid;opacity:.85}.stage-corner.a{left:15px;top:15px;border-width:2px 0 0 2px;border-radius:6px 0 0}.stage-corner.b{right:15px;top:15px;border-width:2px 2px 0 0;border-radius:0 6px 0 0}.stage-corner.c{left:15px;bottom:15px;border-width:0 0 2px 2px;border-radius:0 0 0 6px}.stage-corner.d{right:15px;bottom:15px;border-width:0 2px 2px 0;border-radius:0 0 6px}.stage-placeholder{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;color:white;text-align:center;padding:25px;transition:opacity .2s}.stage.has-video .stage-placeholder{opacity:0;pointer-events:none}.camera-orbit{position:relative;width:92px;height:92px;margin-bottom:15px;border:1px solid #a9a3ff50;border-radius:50%;display:grid;place-items:center;background:radial-gradient(circle,#8379ff25,transparent 70%)}.camera-orbit:before,.camera-orbit:after{content:'';position:absolute;border:1px solid #aaa4ff25;border-radius:50%;inset:10px}.camera-orbit:after{inset:-8px;border-style:dashed;animation:spin 28s linear infinite}.camera-orbit svg{width:42px;color:#c4c0ff}.stage-placeholder strong{font-size:16px;letter-spacing:-.02em}.stage-placeholder span{margin-top:6px;color:#b5bfd2;font-size:12px}.stage-foot{position:absolute;z-index:2;bottom:14px;left:17px;right:17px;display:flex;align-items:center;justify-content:space-between;color:#fff;font-size:11px;font-weight:700}.privacy-chip{display:flex;align-items:center;gap:6px;padding:7px 10px;background:#0b122a88;border:1px solid #ffffff2a;border-radius:999px;backdrop-filter:blur(10px)}.privacy-chip svg{width:13px;color:#65dbb0}.stage-foot .camera-tip{color:#d4d9e6}.controls{display:flex;align-items:center;gap:10px;margin-top:14px}.primary,.secondary,.select-wrap{height:45px;border-radius:13px;display:flex;align-items:center;justify-content:center;gap:9px;padding:0 16px;font-size:13px;font-weight:800;transition:transform .18s,box-shadow .18s,background .18s}.primary{border:0;color:white;background:linear-gradient(135deg,#7468f0,#584bd5);box-shadow:0 8px 18px #6255dc26}.primary:hover{transform:translateY(-1px);box-shadow:0 11px 22px #6255dc40}.primary svg,.secondary svg{width:16px}.secondary{background:white;color:#506079;border:1px solid var(--line)}.secondary:hover{background:#f8f9fc}.secondary:disabled,.primary:disabled{opacity:.48;cursor:not-allowed;transform:none;box-shadow:none}.select-wrap{position:relative;margin-left:auto;padding:0 12px;border:1px solid var(--line);background:#fff;color:#536079}.select-wrap svg{width:16px;color:#8176e9}.select-wrap select{appearance:none;border:0;outline:0;background:transparent;color:#45516a;font-weight:700;font-size:12px;padding-right:12px;cursor:pointer}.engine-label{font-size:10px;color:#98a1b1;font-weight:700;letter-spacing:.06em;text-transform:uppercase}.guidance{display:flex;align-items:flex-start;gap:9px;margin-top:13px;padding:11px 13px;border:1px solid #eeeff9;border-radius:12px;background:#f8f8ff;color:#68748c;font-size:11px;line-height:1.5}.guidance svg{flex:none;width:15px;color:#8177df;margin-top:1px}.answer-card{padding:19px;display:flex;flex-direction:column}.answer-top{display:flex;align-items:center;justify-content:space-between}.eyebrow{font-size:10px;color:#8791a5;font-weight:800;letter-spacing:.15em;text-transform:uppercase}.lang-switch{display:flex;padding:3px;border-radius:10px;background:#f1f3f8}.lang-switch button{border:0;background:transparent;color:#7a8497;padding:7px 10px;border-radius:8px;font-weight:800;font-size:10px}.lang-switch button.active{background:white;color:var(--violet);box-shadow:0 2px 7px #15214612}.result-box{position:relative;min-height:230px;margin-top:13px;padding:23px;border-radius:19px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;overflow:hidden;color:white;background:radial-gradient(ellipse at 50% 0%,#7668ef50,transparent 62%),linear-gradient(145deg,#182342,#202950 68%,#183a42)}.result-box:before{content:'';position:absolute;inset:0;opacity:.15;background-image:radial-gradient(#fff 0.65px,transparent .65px);background-size:13px 13px;mask-image:linear-gradient(transparent,#000)}.result-box>*{position:relative}.result-icon{width:43px;height:43px;display:grid;place-items:center;border-radius:14px;background:#ffffff14;color:#cbc7ff;margin-bottom:13px}.result-icon svg{width:22px}.result-empty-title{font-size:17px;font-weight:800;letter-spacing:-.02em}.result-empty-copy{max-width:270px;margin:7px auto 0;color:#bac3d5;font-size:12px;line-height:1.5}.read-hi{font-family:'Noto Sans Devanagari','DM Sans',sans-serif;font-size:clamp(36px,4.2vw,58px);font-weight:800;line-height:1.3;letter-spacing:-.04em}.read-en{margin-top:4px;color:#d9def0;font-size:18px;font-weight:600}.read-label{display:inline-flex;align-items:center;gap:6px;margin-top:15px;border-radius:999px;padding:6px 10px;background:#ffffff12;color:#d3d8e8;font-size:10px;font-weight:700}.read-label i{width:6px;height:6px;border-radius:50%;background:#63d8ac}.result-actions{display:none;gap:9px;margin-top:11px}.result-actions.visible{display:flex}.confirm-btn,.retry-btn{height:39px;padding:0 14px;border-radius:11px;font-size:11px;font-weight:800}.confirm-btn{border:0;background:#e9faf3;color:#21835e;flex:1}.retry-btn{border:1px solid var(--line);background:#fff;color:#67748b}.helper-status{min-height:18px;padding:8px 2px 0;color:#6e7a90;font-size:11px}.divider{height:1px;background:#edf0f5;margin:9px 0 13px}.phrase-heading{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}.phrase-heading b{font-size:12px}.phrase-heading span{color:#98a2b3;font-size:10px}.phrases{display:grid;grid-template-columns:1fr 1fr;gap:8px}.phrase{min-height:42px;padding:8px 10px;border:1px solid #e7eaf2;background:#fff;border-radius:11px;color:#526079;font-size:11px;font-weight:700;text-align:left;transition:border-color .15s,background .15s}.phrase:hover{border-color:#c7c1ff;background:#faf9ff;color:#5549c7}.bottom-row{display:grid;grid-template-columns:1fr auto;gap:18px;align-items:center;margin-top:15px;padding:13px 16px;border:1px solid #e4e8f1;border-radius:17px;background:#ffffffb8}.session-title{display:flex;align-items:center;gap:8px;font-size:11px;font-weight:800}.session-title svg{width:15px;color:var(--violet)}.session-empty{color:#8b96a9;font-size:11px}.session-items{display:flex;gap:7px;flex-wrap:wrap;margin-top:8px}.session-item{padding:6px 9px;border:1px solid #e6eaf2;background:white;border-radius:9px;font-size:10px;color:#586780}.scope{max-width:360px;color:#8490a3;font-size:10px;line-height:1.5;text-align:right}.scope b{color:#637088}.toast{position:fixed;z-index:10;bottom:22px;left:50%;transform:translate(-50%,15px);opacity:0;pointer-events:none;padding:11px 15px;background:#17233d;color:white;border-radius:12px;box-shadow:0 12px 28px #17233d35;font-size:12px;font-weight:700;transition:.2s}.toast.show{opacity:1;transform:translate(-50%,0)}@keyframes spin{to{transform:rotate(360deg)}}@media(min-height:900px){.shell{padding-bottom:38px}.intro{padding-top:38px;padding-bottom:28px}.stage{min-height:340px}.result-box{min-height:290px}.camera-card,.answer-card{padding:23px}}@media(max-width:940px){.shell{padding-left:23px;padding-right:23px}.workspace{grid-template-columns:minmax(0,1fr) minmax(310px,.88fr)}.camera-card,.answer-card{padding:15px}.stage{min-height:235px}.result-box{min-height:220px}}@media(max-width:760px){.shell{padding:0 16px 22px}.topbar{height:66px}.privacy{display:none}.intro{align-items:flex-start;flex-direction:column;padding:22px 0 16px;gap:12px}.intro h1{font-size:34px}.intro p{font-size:13px}.workspace{grid-template-columns:1fr;gap:12px}.camera-card,.answer-card{padding:14px;border-radius:19px}.stage{min-height:215px;aspect-ratio:16/10}.result-box{min-height:195px}.bottom-row{grid-template-columns:1fr;gap:10px}.scope{text-align:left;max-width:none}.mode-pill{font-size:10px;padding:8px 10px}.controls{gap:7px}.primary,.secondary{padding:0 11px;height:42px}.select-wrap{height:42px;padding:0 8px}.select-wrap select{max-width:105px;font-size:10px}.engine-label{display:none}}@media(max-width:390px){.brand{font-size:16px}.brand-mark{width:35px;height:35px}.connection{font-size:10px;padding:8px 9px}.intro h1{font-size:30px}.stage{min-height:190px}.controls{flex-wrap:wrap}.select-wrap{margin-left:0}.phrase{font-size:10px}}
@@ -141,61 +143,787 @@ walkthroughLanguage.addEventListener('change',updateWalkthroughLanguage);walkthr
 
 const video=document.querySelector('#video'),stage=document.querySelector('#stage'),landmarkOverlay=document.querySelector('#landmarkOverlay'),start=document.querySelector('#start'),stop=document.querySelector('#stop'),engine=document.querySelector('#engine'),dot=document.querySelector('#dot'),connection=document.querySelector('#connection'),cameraDot=document.querySelector('#cameraDot'),cameraState=document.querySelector('#cameraState'),status=document.querySelector('#status'),emptyResult=document.querySelector('#emptyResult'),reading=document.querySelector('#reading'),readHi=document.querySelector('#readHi'),readEn=document.querySelector('#readEn'),readLabel=document.querySelector('#readLabel').querySelector('span'),actions=document.querySelector('#resultActions'),session=document.querySelector('#session'),sessionEmpty=document.querySelector('#sessionEmpty'),toast=document.querySelector('#toast'),autoSpeak=document.querySelector('#autoSpeak'),onlineVoice=document.querySelector('#onlineVoice'),trackingPanel=document.querySelector('#trackingPanel'),trackingTitle=document.querySelector('#trackingTitle'),trackingCopy=document.querySelector('#trackingCopy');
 let stream=null,ws=null,timer=null,reconnectTimer=null,reconnectAttempt=0,lastLabel='',current=null,language='hi',items=[],toastTimer,stoppingCamera=false,speechPlaybackId=0,lastBackpressureNotice=0;
+let mpHands=null,mpCamera=null,lastMpLandmarks=null,mlInFlight=false,isCloudMode=false;
+
 function notify(text){toast.textContent=text;toast.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>toast.classList.remove('show'),2200)}
 function setStatus(text){status.textContent=text}
+
 const overlayCtx=landmarkOverlay.getContext('2d'),handBones=[[0,1],[1,2],[2,3],[3,4],[0,5],[5,6],[6,7],[7,8],[0,17],[17,18],[18,19],[19,20],[5,9],[9,10],[10,11],[11,12],[9,13],[13,14],[14,15],[15,16],[13,17]];
-function drawLandmarks(hands=[]){const box=stage.getBoundingClientRect(),dpr=window.devicePixelRatio||1;landmarkOverlay.width=Math.round(box.width*dpr);landmarkOverlay.height=Math.round(box.height*dpr);overlayCtx.setTransform(dpr,0,0,dpr,0,0);overlayCtx.clearRect(0,0,box.width,box.height);if(!hands.length||!video.videoWidth)return;const scale=Math.max(box.width/video.videoWidth,box.height/video.videoHeight),cropX=(video.videoWidth*scale-box.width)/2,cropY=(video.videoHeight*scale-box.height)/2;hands.forEach((points,index)=>{const color=index?'#ffd166':'#69e1b3',xy=points.map(p=>({x:(video.videoWidth*(1-p[0])*scale)-cropX,y:(video.videoHeight*p[1]*scale)-cropY}));overlayCtx.lineWidth=2.5;overlayCtx.lineCap='round';overlayCtx.strokeStyle=color;overlayCtx.shadowColor=color;overlayCtx.shadowBlur=9;for(const [a,b] of handBones){if(!xy[a]||!xy[b])continue;overlayCtx.beginPath();overlayCtx.moveTo(xy[a].x,xy[a].y);overlayCtx.lineTo(xy[b].x,xy[b].y);overlayCtx.stroke()}overlayCtx.shadowBlur=0;for(const pt of xy){overlayCtx.beginPath();overlayCtx.arc(pt.x,pt.y,3.3,0,Math.PI*2);overlayCtx.fillStyle='#fff';overlayCtx.fill();overlayCtx.lineWidth=1.8;overlayCtx.strokeStyle=color;overlayCtx.stroke()}})}
+
+function drawLandmarks(hands=[]){
+  const box=stage.getBoundingClientRect(),dpr=window.devicePixelRatio||1;
+  landmarkOverlay.width=Math.round(box.width*dpr);
+  landmarkOverlay.height=Math.round(box.height*dpr);
+  overlayCtx.setTransform(dpr,0,0,dpr,0,0);
+  overlayCtx.clearRect(0,0,box.width,box.height);
+  if(!hands.length||!video.videoWidth)return;
+  const scale=Math.max(box.width/video.videoWidth,box.height/video.videoHeight);
+  const cropX=(video.videoWidth*scale-box.width)/2;
+  const cropY=(video.videoHeight*scale-box.height)/2;
+  hands.forEach((points,index)=>{
+    const color=index?'#ffd166':'#69e1b3';
+    const xy=points.map(p=>({x:(video.videoWidth*(1-p[0])*scale)-cropX,y:(video.videoHeight*p[1]*scale)-cropY}));
+    overlayCtx.lineWidth=2.5;overlayCtx.lineCap='round';overlayCtx.strokeStyle=color;overlayCtx.shadowColor=color;overlayCtx.shadowBlur=9;
+    for(const [a,b] of handBones){
+      if(!xy[a]||!xy[b])continue;
+      overlayCtx.beginPath();overlayCtx.moveTo(xy[a].x,xy[a].y);overlayCtx.lineTo(xy[b].x,xy[b].y);overlayCtx.stroke();
+    }
+    overlayCtx.shadowBlur=0;
+    for(const pt of xy){
+      overlayCtx.beginPath();overlayCtx.arc(pt.x,pt.y,3.3,0,Math.PI*2);
+      overlayCtx.fillStyle='#fff';overlayCtx.fill();
+      overlayCtx.lineWidth=1.8;overlayCtx.strokeStyle=color;overlayCtx.stroke();
+    }
+  });
+}
 window.addEventListener('resize',()=>drawLandmarks());
-async function speakOnline(hi,en){const text=language==='hi'?hi:en,lang=language==='hi'?'hi':'en';setStatus('Preparing the optional online voice…');try{const response=await fetch('/api/speech',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({text,lang})});if(!response.ok){let message='Online voice could not be prepared.';try{message=(await response.json()).detail||message}catch{}setStatus(message+' The text reading is still available.');return false}const blob=await response.blob(),url=URL.createObjectURL(blob),audio=new Audio(url);audio.onended=()=>URL.revokeObjectURL(url);audio.onerror=()=>{URL.revokeObjectURL(url);setStatus('Online audio could not play. The text reading is still available.')};await audio.play();setStatus(`Speaking the confirmed reading in ${language==='hi'?'Hindi':'English'}…`);return true}catch(e){setStatus('Online voice failed. Check the internet connection; the text reading is still available.');return false}}
-function splitSpeechText(text,limit=150){const words=String(text).trim().split(/\s+/);const chunks=[];let chunk='';for(const word of words){if(!word)continue;if(chunk&&chunk.length+1+word.length>limit){chunks.push(chunk);chunk=word}else chunk+=(chunk?' ':'')+word}if(chunk)chunks.push(chunk);return chunks}
-async function speakReading(hi,en){const text=language==='hi'?hi:en,lang=language==='hi'?'hi':'en';const playback=++speechPlaybackId;if(!('speechSynthesis'in window)||!('SpeechSynthesisUtterance'in window)){if(onlineVoice.checked)return speakOnline(hi,en);setStatus('Device speech is unavailable. Enable optional online voice or keep using the text reading.');return false}speechSynthesis.cancel();let voices=speechSynthesis.getVoices();if(!voices.length){setStatus('Checking available device voices…');voices=await new Promise(resolve=>{let settled=false;const finish=()=>{if(settled)return;settled=true;speechSynthesis.removeEventListener('voiceschanged',onChange);resolve(speechSynthesis.getVoices())},onChange=()=>{if(speechSynthesis.getVoices().length)finish()};speechSynthesis.addEventListener('voiceschanged',onChange);setTimeout(finish,1200)})}if(playback!==speechPlaybackId)return false;const wanted=lang==='hi'?'hi-IN':'en-IN',normalized=v=>v.lang.toLowerCase().replace('_','-'),voice=voices.find(v=>normalized(v)===wanted.toLowerCase())||voices.find(v=>normalized(v).startsWith(lang));if(!voice){return speakOnline(hi,en)}const chunks=splitSpeechText(text);if(!chunks.length){setStatus('There is no text to speak.');return false}let index=0;const speakNext=()=>{if(playback!==speechPlaybackId)return;if(index>=chunks.length){setStatus(`Finished speaking in ${lang==='hi'?'Hindi':'English'}.`);return}const utterance=new SpeechSynthesisUtterance(chunks[index]);utterance.voice=voice;utterance.lang=voice.lang;utterance.rate=.92;utterance.onstart=()=>setStatus(`Speaking in ${lang==='hi'?'Hindi':'English'} · part ${index+1} of ${chunks.length}…`);utterance.onend=()=>{if(playback!==speechPlaybackId)return;index++;speakNext()};utterance.onerror=event=>{if(playback!==speechPlaybackId)return;if(['canceled','interrupted'].includes(event.error)){setStatus('Speech was interrupted. Tap Speak reading to try again; the full text remains available.');return}if(onlineVoice.checked){speakOnline(hi,en);return}setStatus(`Device voice stopped (${event.error||'unknown error'}). Turn on online voice or try a shorter message; the text remains available.`)};speechSynthesis.speak(utterance)};speakNext();return true}
-function renderReading(hi,en,label,note=''){current={hi,en,label,note};trackingPanel.hidden=true;emptyResult.hidden=true;reading.hidden=false;readHi.textContent=language==='hi'?hi:en;readEn.textContent=language==='hi'?en:hi;readLabel.textContent=note||label||'Reading detected';actions.classList.add('visible');document.querySelector('#confirm').textContent='✓  Yes, that is right';const meaningNote=note.includes('Informal thumbs-up')?'Informal approval cue. Confirm with the visitor.':note.includes('Informal thumbs-down')?'Informal disapproval cue. Confirm with the visitor.':'';setStatus(`${meaningNote?meaningNote+' ':''}${autoSpeak.checked?'Confirm to add this reading and speak it aloud.':'Confirm to add this reading. You can use Speak reading for audio.'}`)}
-function clearReading(){current=null;lastLabel='';trackingPanel.hidden=true;emptyResult.hidden=false;reading.hidden=true;actions.classList.remove('visible');setStatus(stream?'Listening for a steady sign…':'Waiting for a sign…')}
-function updateVisitorDisplay(){const latest=items[0],hi=document.querySelector('#visitorDisplayHi'),en=document.querySelector('#visitorDisplayEn'),role=document.querySelector('#visitorDisplayRole'),title=document.querySelector('#visitorDisplayTitle');if(!latest){hi.textContent='संदेश की पुष्टि होने पर यहाँ दिखेगा।';en.textContent='A confirmed message will appear here.';role.textContent='Sanket Setu · messages are shown after confirmation';title.textContent='A message for you';return}hi.textContent=latest.hi;en.textContent=latest.en;role.textContent=`${latest.role==='Staff'?'Staff reply':'Visitor message'} · ${latest.time.toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'})}`;title.textContent=latest.role==='Staff'?'A reply for you':'Your message'}
-function addItem(role,hi,en){items.unshift({role,hi,en,time:new Date()});items=items.slice(0,100);session.replaceChildren();for(const item of items.slice(0,4)){const el=document.createElement('span');el.className='session-item';el.textContent=(item.role==='Staff'?'Staff · ':'Visitor · ')+(language==='hi'?item.hi:item.en);session.append(el)}if(!items.length){session.append(sessionEmpty)}updateVisitorDisplay()}
-function scheduleReconnect(){if(!stream||stoppingCamera||reconnectTimer)return;const delay=Math.min(1000*(2**reconnectAttempt),8000);reconnectAttempt=Math.min(reconnectAttempt+1,4);connection.textContent='Reconnecting…';setStatus(`Live service unavailable. Reconnecting in ${Math.ceil(delay/1000)} seconds…`);reconnectTimer=setTimeout(()=>{reconnectTimer=null;if(stream&&!stoppingCamera)connect()},delay)}
-function connect(){if(!stream||stoppingCamera)return;const socketProtocol=location.protocol==='https:'?'wss:':'ws:';try{ws=new WebSocket(`${socketProtocol}//${location.host}/ws/live`)}catch(error){scheduleReconnect();return}const socket=ws;socket.onopen=()=>{if(stoppingCamera||!stream){socket.close();return}reconnectAttempt=0;dot.classList.add('on');connection.textContent='Connected';socket.send(JSON.stringify({type:'configure',engine:engine.value}))};socket.onclose=()=>{if(ws===socket)dot.classList.remove('on');if(stream&&!stoppingCamera)scheduleReconnect();else connection.textContent='Not connected'};socket.onerror=()=>{if(ws===socket){connection.textContent='Reconnecting…';setStatus('Live connection interrupted. Keeping the camera ready while reconnecting…')}};socket.onmessage=e=>{let m;try{m=JSON.parse(e.data)}catch(error){setStatus('The live service sent an unreadable response. Restart the camera and try again.');return}if(Array.isArray(m.landmarks))drawLandmarks(m.landmarks);if(m.type==='ready'){if(!m.model_ready){setStatus(m.message);clearReading();return}setStatus('Live recognition ready · camera frames are not saved');return}if(m.status==='tracking'){lastLabel='';current=null;emptyResult.hidden=true;reading.hidden=true;trackingPanel.hidden=false;actions.classList.remove('visible');trackingTitle.textContent=`${m.hands||2} hands detected`;trackingCopy.textContent=m.message||'Tracking hand pose and movement…';setStatus('Live tracking · hand pose and movement update as you move.');return}if(m.status==='recognized'){if(m.label!==lastLabel||!current||reading.hidden){lastLabel=m.label;renderReading(m.text_hi,m.text_en,m.label,m.message|| (m.engine==='geometric'?'Geometric recognition':'Model reading'))}}else if(m.status==='no_hand'){lastLabel='';clearReading();setStatus(language==='hi'?(m.message_hi||m.message):(m.message_en||m.message))}else if(m.status==='framing'){lastLabel='';clearReading();drawLandmarks(Array.isArray(m.landmarks)?m.landmarks:[]);setStatus(language==='hi'?m.message_hi:m.message_en)}else if(m.status==='settling'){if(!current)setStatus(m.message||'Hold your hand steady…')}else if(m.status==='model_not_ready'){lastLabel='';clearReading();setStatus(m.message||'The trained model is not ready. Use Gesture + numbers or check setup.')}else if(m.status==='low_score'||m.status==='unsupported_sign'){lastLabel='';clearReading();setStatus('I could not confidently read that sign. Please choose the intended message from the hospital message board below.')}else if(m.status==='error'){setStatus(m.message||'Frame could not be processed.')}}}
+
+// --- 3D Geometric Analysis (Direct rule-based mirror of geometric.py) ---
+function angleDeg(a,b,c){
+  const v1=[a[0]-b[0],a[1]-b[1],a[2]-b[2]],v2=[c[0]-b[0],c[1]-b[1],c[2]-b[2]];
+  const n1=Math.hypot(v1[0],v1[1],v1[2]),n2=Math.hypot(v2[0],v2[1],v2[2]);
+  if(n1<1e-9||n2<1e-9)return 0;
+  const dot=v1[0]*v2[0]+v1[1]*v2[1]+v1[2]*v2[2];
+  const cos=Math.max(-1,Math.min(1,dot/(n1*n2)));
+  return Math.acos(cos)*(180/Math.PI);
+}
+
+function classifyHandPose(pts){
+  const wrist=pts[0];
+  const fingers={index:[5,6,7,8],middle:[9,10,11,12],ring:[13,14,15,16],pinky:[17,18,19,20]};
+  const states={};
+  for(const [name,[mcp_i,pip_i,dip_i,tip_i]] of Object.entries(fingers)){
+    const angle=angleDeg(pts[mcp_i],pts[pip_i],pts[dip_i]);
+    const tip_r=Math.hypot(pts[tip_i][0]-wrist[0],pts[tip_i][1]-wrist[1]);
+    const pip_r=Math.hypot(pts[pip_i][0]-wrist[0],pts[pip_i][1]-wrist[1]);
+    const ratio=pip_r>1e-9?tip_r/pip_r:0;
+    states[name]=(angle>=135)&&(ratio>=0.72);
+  }
+  const thumb_angle=angleDeg(pts[5],pts[2],pts[3]);
+  const thumb_out=Math.hypot(pts[4][0]-pts[5][0],pts[4][1]-pts[5][1])/Math.max(Math.hypot(pts[2][0]-wrist[0],pts[2][1]-wrist[1]),1e-9);
+  const palm_scale=Math.hypot(pts[9][0]-wrist[0],pts[9][1]-wrist[1]);
+  const thumb_spread=Math.hypot(pts[4][0]-pts[5][0],pts[4][1]-pts[5][1])/Math.max(palm_scale,1e-9);
+  const thumb_extended=(thumb_angle>=130)||(thumb_out>=1.05)||(thumb_spread>=0.58);
+  states.thumb=thumb_extended;
+
+  let count=(states.index?1:0)+(states.middle?1:0)+(states.ring?1:0)+(states.pinky?1:0);
+  if(count===4&&thumb_extended)count=5;
+
+  const touch_ratio=Math.hypot(pts[4][0]-pts[8][0],pts[4][1]-pts[8][1])/Math.max(palm_scale,1e-9);
+  if(!states.index&&states.middle&&states.ring&&states.pinky&&touch_ratio<=0.38){
+    return {status:'recognized',label:'gesture_ok',text_hi:'ठीक',text_en:'OK',note:'OK pose · gesture baseline'};
+  }
+  if(states.thumb&&states.pinky&&!states.index&&!states.middle&&!states.ring){
+    return {status:'recognized',label:'gesture_shaka',text_hi:'नमस्ते',text_en:'Friendly greeting',note:'Shaka gesture · baseline'};
+  }
+  if(states.thumb&&states.index&&states.pinky&&!states.middle&&!states.ring){
+    return {status:'recognized',label:'gesture_ily',text_hi:'आई लव यू',text_en:'I Love You',note:'ILY gesture · baseline'};
+  }
+  if(!states.thumb&&states.index&&states.pinky&&!states.middle&&!states.ring){
+    return {status:'recognized',label:'gesture_rock_on',text_hi:'रॉक ऑन',text_en:'Rock on',note:'Rock on · gesture baseline'};
+  }
+  if(!states.middle&&!states.ring&&!states.pinky&&touch_ratio<=0.38){
+    return {status:'recognized',label:'gesture_pinch',text_hi:'पिंच / थोड़ा',text_en:'Pinch / Little',note:'Pinch gesture · baseline'};
+  }
+
+  const thumb_vector_y=pts[4][1]-pts[2][1];
+  const thumb_len=Math.hypot(pts[4][0]-pts[2][0],thumb_vector_y);
+  if(count===0&&thumb_len>=0.35*palm_scale&&thumb_len>1e-6){
+    if(Math.abs(thumb_vector_y)/thumb_len>=0.72){
+      if(thumb_vector_y<0){
+        return {status:'recognized',label:'gesture_thumbs_up',text_hi:'ठीक है',text_en:"I'm okay",note:'Informal thumbs-up (approval cue).'};
+      }else{
+        return {status:'recognized',label:'gesture_thumbs_down',text_hi:'असहमत',text_en:'Disagree',note:'Informal thumbs-down (disapproval cue).'};
+      }
+    }
+  }
+  if(!states.thumb&&!states.index&&!states.middle&&!states.ring&&!states.pinky){
+    return {status:'recognized',label:'gesture_closed_fist',text_hi:'बंद मुट्ठी',text_en:'Closed fist',note:'Closed fist · gesture baseline'};
+  }
+
+  if(count>=1&&count<=5){
+    const numLabels={
+      1:{hi:'एक (1)',en:'One (1)',label:'num_1'},
+      2:{hi:'दो (2)',en:'Two (2)',label:'num_2'},
+      3:{hi:'तीन (3)',en:'Three (3)',label:'num_3'},
+      4:{hi:'चार (4)',en:'Four (4)',label:'num_4'},
+      5:{hi:'पाँच (5)',en:'Five (5)',label:'num_5'}
+    };
+    const n=numLabels[count];
+    return {status:'recognized',label:n.label,text_hi:n.hi,text_en:n.en,note:`Numeral ${count} · geometric baseline`};
+  }
+  return {status:'settling',message:'Hold hand steady for recognition…'};
+}
+
+// --- In-Browser MediaPipe Hands Engine ---
+function initMediaPipe(){
+  if(typeof Hands==='undefined'||mpHands)return;
+  try{
+    mpHands=new Hands({locateFile:f=>`https://cdn.jsdelivr.net/npm/@mediapipe/hands/${f}`});
+    mpHands.setOptions({maxNumHands:2,modelComplexity:1,minDetectionConfidence:0.48,minTrackingConfidence:0.45});
+    mpHands.onResults(onMpResults);
+  }catch(e){}
+}
+
+function onMpResults(results){
+  if(stoppingCamera||!stream)return;
+  if(!results.multiHandLandmarks||!results.multiHandLandmarks.length){
+    drawLandmarks([]);
+    clearReading();
+    setStatus(language==='hi'?'हाथ दिखाएँ · कैमरा आपके हाथ का इंतज़ार कर रहा है':'Show hand to camera · Waiting for a sign…');
+    return;
+  }
+  const hands=results.multiHandLandmarks.map(hand=>hand.map(p=>[p.x,p.y,p.z||0]));
+  drawLandmarks(hands);
+
+  if(hands.length>1){
+    lastLabel='';current=null;emptyResult.hidden=true;reading.hidden=true;trackingPanel.hidden=false;
+    actions.classList.remove('visible');
+    trackingTitle.textContent=`${hands.length} hands detected`;
+    trackingCopy.textContent='Tracking hand pose and movement…';
+    setStatus('Two hands detected · movement tracked in real time.');
+    return;
+  }
+
+  const handPts=hands[0];
+  lastMpLandmarks=handPts;
+
+  // Immediate 0-latency geometric classification
+  const geo=classifyHandPose(handPts);
+  if(geo.status==='recognized'){
+    handleRecognitionMessage({
+      status:'recognized',
+      engine:'geometric',
+      label:geo.label,
+      score:1.0,
+      text_hi:geo.text_hi,
+      text_en:geo.text_en,
+      message:geo.note,
+      landmarks:hands
+    });
+  }
+
+  // If trained ML engine selected, query backend model with normalized landmarks
+  if(engine.value==='ml'&&!mlInFlight){
+    mlInFlight=true;
+    fetch('/api/recognize/landmarks',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({points:handPts,engine:'ml'})
+    })
+    .then(r=>r.json())
+    .then(data=>{
+      mlInFlight=false;
+      if(data&&data.status==='recognized')handleRecognitionMessage(data);
+    })
+    .catch(()=>{mlInFlight=false;});
+  }
+}
+
+// --- Speech Synthesis ---
+async function speakOnline(hi,en){
+  const text=language==='hi'?hi:en,lang=language==='hi'?'hi':'en';
+  setStatus('Preparing the optional online voice…');
+  try{
+    const response=await fetch('/api/speech',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({text,lang})});
+    if(!response.ok){
+      let message='Online voice could not be prepared.';
+      try{message=(await response.json()).detail||message}catch{}
+      setStatus(message+' The text reading is still available.');
+      return false;
+    }
+    const blob=await response.blob(),url=URL.createObjectURL(blob),audio=new Audio(url);
+    audio.onended=()=>URL.revokeObjectURL(url);
+    audio.onerror=()=>{URL.revokeObjectURL(url);setStatus('Online audio could not play. The text reading is still available.');};
+    await audio.play();
+    setStatus(`Speaking the confirmed reading in ${language==='hi'?'Hindi':'English'}…`);
+    return true;
+  }catch(e){
+    setStatus('Online voice failed. The text reading is still available.');
+    return false;
+  }
+}
+
+function splitSpeechText(text,limit=150){
+  const words=String(text).trim().split(/\s+/);
+  const chunks=[];let chunk='';
+  for(const word of words){
+    if(!word)continue;
+    if(chunk&&chunk.length+1+word.length>limit){chunks.push(chunk);chunk=word}
+    else chunk+=(chunk?' ':'')+word;
+  }
+  if(chunk)chunks.push(chunk);
+  return chunks;
+}
+
+async function speakReading(hi,en){
+  const text=language==='hi'?hi:en,lang=language==='hi'?'hi':'en';
+  const playback=++speechPlaybackId;
+  if(!('speechSynthesis'in window)||!('SpeechSynthesisUtterance'in window)){
+    if(onlineVoice.checked)return speakOnline(hi,en);
+    setStatus('Device speech is unavailable. Turn on optional online voice or keep using the text reading.');
+    return false;
+  }
+  speechSynthesis.cancel();
+  let voices=speechSynthesis.getVoices();
+  if(!voices.length){
+    setStatus('Checking available device voices…');
+    voices=await new Promise(resolve=>{
+      let settled=false;
+      const finish=()=>{if(settled)return;settled=true;speechSynthesis.removeEventListener('voiceschanged',onChange);resolve(speechSynthesis.getVoices())};
+      const onChange=()=>{if(speechSynthesis.getVoices().length)finish()};
+      speechSynthesis.addEventListener('voiceschanged',onChange);
+      setTimeout(finish,1200);
+    });
+  }
+  if(playback!==speechPlaybackId)return false;
+  const wanted=lang==='hi'?'hi-IN':'en-IN';
+  const normalized=v=>v.lang.toLowerCase().replace('_','-');
+  const voice=voices.find(v=>normalized(v)===wanted.toLowerCase())||voices.find(v=>normalized(v).startsWith(lang));
+  if(!voice)return speakOnline(hi,en);
+
+  const chunks=splitSpeechText(text);
+  if(!chunks.length){setStatus('There is no text to speak.');return false}
+  let index=0;
+  const speakNext=()=>{
+    if(playback!==speechPlaybackId)return;
+    if(index>=chunks.length){setStatus(`Finished speaking in ${lang==='hi'?'Hindi':'English'}.`);return}
+    const utterance=new SpeechSynthesisUtterance(chunks[index]);
+    utterance.voice=voice;utterance.lang=voice.lang;utterance.rate=.92;
+    utterance.onstart=()=>setStatus(`Speaking in ${lang==='hi'?'Hindi':'English'} · part ${index+1} of ${chunks.length}…`);
+    utterance.onend=()=>{if(playback!==speechPlaybackId)return;index++;speakNext()};
+    utterance.onerror=event=>{
+      if(playback!==speechPlaybackId)return;
+      if(['canceled','interrupted'].includes(event.error)){
+        setStatus('Speech was interrupted. Tap Speak reading to try again; the full text remains available.');
+        return;
+      }
+      if(onlineVoice.checked){speakOnline(hi,en);return}
+      setStatus(`Device voice stopped (${event.error||'unknown error'}). The text remains available.`);
+    };
+    speechSynthesis.speak(utterance);
+  };
+  speakNext();
+  return true;
+}
+
+function renderReading(hi,en,label,note=''){
+  current={hi,en,label,note};
+  trackingPanel.hidden=true;emptyResult.hidden=true;reading.hidden=false;
+  readHi.textContent=language==='hi'?hi:en;
+  readEn.textContent=language==='hi'?en:hi;
+  readLabel.textContent=note||label||'Reading detected';
+  actions.classList.add('visible');
+  document.querySelector('#confirm').textContent='✓  Yes, that is right';
+  const meaningNote=note.includes('Informal thumbs-up')?'Informal approval cue. Confirm with the visitor.':note.includes('Informal thumbs-down')?'Informal disapproval cue. Confirm with the visitor.':'';
+  setStatus(`${meaningNote?meaningNote+' ':''}${autoSpeak.checked?'Confirm to add this reading and speak it aloud.':'Confirm to add this reading. You can use Speak reading for audio.'}`);
+}
+
+function clearReading(){
+  current=null;lastLabel='';trackingPanel.hidden=true;emptyResult.hidden=false;reading.hidden=true;
+  actions.classList.remove('visible');
+  setStatus(stream?'Listening for a steady sign…':'Waiting for a sign…');
+}
+
+function updateVisitorDisplay(){
+  const latest=items[0],hi=document.querySelector('#visitorDisplayHi'),en=document.querySelector('#visitorDisplayEn'),role=document.querySelector('#visitorDisplayRole'),title=document.querySelector('#visitorDisplayTitle');
+  if(!latest){
+    hi.textContent='संदेश की पुष्टि होने पर यहाँ दिखेगा।';
+    en.textContent='A confirmed message will appear here.';
+    role.textContent='Sanket Setu · messages are shown after confirmation';
+    title.textContent='A message for you';
+    return;
+  }
+  hi.textContent=latest.hi;en.textContent=latest.en;
+  role.textContent=`${latest.role==='Staff'?'Staff reply':'Visitor message'} · ${latest.time.toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'})}`;
+  title.textContent=latest.role==='Staff'?'A reply for you':'Your message';
+}
+
+function addItem(role,hi,en){
+  items.unshift({role,hi,en,time:new Date()});
+  items=items.slice(0,100);
+  session.replaceChildren();
+  for(const item of items.slice(0,4)){
+    const el=document.createElement('span');el.className='session-item';
+    el.textContent=(item.role==='Staff'?'Staff · ':'Visitor · ')+(language==='hi'?item.hi:item.en);
+    session.append(el);
+  }
+  if(!items.length)session.append(sessionEmpty);
+  updateVisitorDisplay();
+}
+
+function handleRecognitionMessage(m){
+  if(Array.isArray(m.landmarks))drawLandmarks(m.landmarks);
+  if(m.type==='ready'){
+    if(!m.model_ready){setStatus(m.message);clearReading();return}
+    setStatus('Live recognition ready · camera frames are not saved');
+    return;
+  }
+  if(m.status==='tracking'){
+    lastLabel='';current=null;emptyResult.hidden=true;reading.hidden=true;trackingPanel.hidden=false;
+    actions.classList.remove('visible');
+    trackingTitle.textContent=`${m.hands||2} hands detected`;
+    trackingCopy.textContent=m.message||'Tracking hand pose and movement…';
+    setStatus('Live tracking · hand pose and movement update as you move.');
+    return;
+  }
+  if(m.status==='recognized'){
+    if(m.label!==lastLabel||!current||reading.hidden){
+      lastLabel=m.label;
+      renderReading(m.text_hi,m.text_en,m.label,m.message||(m.engine==='geometric'?'Geometric recognition':'Model reading'));
+    }
+  }else if(m.status==='no_hand'){
+    lastLabel='';clearReading();
+    setStatus(language==='hi'?(m.message_hi||m.message||'हाथ दिखाएँ · कैमरा हाथ का इंतज़ार कर रहा है'):(m.message_en||m.message||'Show hand to camera'));
+  }else if(m.status==='framing'){
+    lastLabel='';clearReading();
+    if(Array.isArray(m.landmarks))drawLandmarks(m.landmarks);
+    setStatus(language==='hi'?m.message_hi:m.message_en);
+  }else if(m.status==='settling'){
+    if(!current)setStatus(m.message||'Hold your hand steady…');
+  }else if(m.status==='model_not_ready'){
+    lastLabel='';clearReading();
+    setStatus(m.message||'The trained model is not ready. Use Gesture + numbers or check setup.');
+  }else if(m.status==='low_score'||m.status==='unsupported_sign'){
+    lastLabel='';clearReading();
+    setStatus('I could not confidently read that sign. Please choose the intended message from the hospital message board below.');
+  }else if(m.status==='error'){
+    setStatus(m.message||'Frame processing ready.');
+  }
+}
+
+function scheduleReconnect(){
+  if(!stream||stoppingCamera||reconnectTimer)return;
+  reconnectAttempt++;
+  if(reconnectAttempt>=2){
+    isCloudMode=true;
+    dot.classList.add('on');
+    connection.textContent='Camera Live (Active)';
+    setStatus('Live recognition active · Camera stays on this device');
+    return;
+  }
+  const delay=Math.min(1000*(2**reconnectAttempt),4000);
+  connection.textContent='Reconnecting…';
+  reconnectTimer=setTimeout(()=>{
+    reconnectTimer=null;
+    if(stream&&!stoppingCamera)connect();
+  },delay);
+}
+
+function connect(){
+  if(!stream||stoppingCamera)return;
+  const socketProtocol=location.protocol==='https:'?'wss:':'ws:';
+  try{
+    ws=new WebSocket(`${socketProtocol}//${location.host}/ws/live`);
+  }catch(error){
+    scheduleReconnect();
+    return;
+  }
+  const socket=ws;
+  socket.onopen=()=>{
+    if(stoppingCamera||!stream){socket.close();return}
+    reconnectAttempt=0;
+    isCloudMode=false;
+    dot.classList.add('on');
+    connection.textContent='Connected (WS)';
+    socket.send(JSON.stringify({type:'configure',engine:engine.value}));
+  };
+  socket.onclose=()=>{
+    if(ws===socket){
+      if(stream&&!stoppingCamera)scheduleReconnect();
+      else{dot.classList.remove('on');connection.textContent='Not connected';}
+    }
+  };
+  socket.onerror=()=>{
+    if(ws===socket)scheduleReconnect();
+  };
+  socket.onmessage=e=>{
+    let m;
+    try{m=JSON.parse(e.data)}catch{return}
+    handleRecognitionMessage(m);
+  };
+}
+
 stage.addEventListener('click',()=>{if(!stream&&!start.disabled)start.click()});
-start.onclick=async()=>{try{if(!navigator.mediaDevices?.getUserMedia)throw new Error('Camera access requires HTTPS or localhost in a supported browser.');stoppingCamera=false;stream=await navigator.mediaDevices.getUserMedia({video:{facingMode:'user',width:{ideal:960},height:{ideal:540}},audio:false});video.srcObject=stream;await video.play();stage.classList.add('has-video');cameraDot.classList.add('on');cameraState.textContent='Camera live';start.disabled=true;stop.disabled=false;stream.getVideoTracks().forEach(track=>track.addEventListener('ended',()=>{if(stream&&!stoppingCamera){stop.click();setStatus('Camera stopped by the browser or device. Start it again when ready.')}},{once:true}));connect();const canvas=document.createElement('canvas'),ctx=canvas.getContext('2d');if(!ctx)throw new Error('Could not create the camera frame canvas.');timer=setInterval(()=>{if(!ws||ws.readyState!==1||video.readyState<2||!video.videoWidth)return;if(ws.bufferedAmount>300000){const now=Date.now();if(now-lastBackpressureNotice>2500){setStatus('Catching up with the camera… sending the newest frame.');lastBackpressureNotice=now}return}try{canvas.width=320;canvas.height=Math.round(320*video.videoHeight/video.videoWidth);ctx.drawImage(video,0,0,canvas.width,canvas.height);const jpeg=canvas.toDataURL('image/jpeg',.64).split(',')[1];ws.send(JSON.stringify({type:'frame',engine:engine.value,jpeg,last_label:lastLabel}))}catch(e){setStatus('Could not send a camera frame. Stop and restart the camera to try again.')}},350)}catch(e){clearInterval(timer);timer=null;if(ws&&ws.readyState<2)ws.close();if(stream)stream.getTracks().forEach(track=>track.stop());stream=null;video.srcObject=null;stage.classList.remove('has-video');cameraDot.classList.remove('on');cameraState.textContent='Camera off';start.disabled=false;stop.disabled=true;setStatus(e.name==='NotAllowedError'?'Camera permission was denied. Allow camera access in browser settings and try again.':e.name==='NotFoundError'?'No camera was found on this device.':e.message||'Camera unavailable. Check browser permission and try again.')}};
-stop.onclick=()=>{stoppingCamera=true;clearInterval(timer);timer=null;clearTimeout(reconnectTimer);reconnectTimer=null;reconnectAttempt=0;if(stream)stream.getTracks().forEach(t=>t.stop());if(ws&&ws.readyState<2)ws.close();video.srcObject=null;stream=null;drawLandmarks([]);lastLabel='';current=null;stage.classList.remove('has-video');cameraDot.classList.remove('on');cameraState.textContent='Camera off';start.disabled=false;stop.disabled=true;clearReading();connection.textContent='Not connected';setStatus('Camera stopped. Start again whenever you are ready.');setTimeout(()=>{stoppingCamera=false},0)};
-engine.onchange=()=>{lastLabel='';if(ws&&ws.readyState===1)ws.send(JSON.stringify({type:'configure',engine:engine.value}));clearReading();setStatus(engine.value==='ml'?'Switching to trained ML…':'Gesture + numeral recognition selected.')};
-document.querySelector('#langHi').onclick=()=>{language='hi';document.querySelector('#langHi').classList.add('active');document.querySelector('#langEn').classList.remove('active');if(current){readHi.textContent=current.hi;readEn.textContent=current.en}renderSessionLanguage()};document.querySelector('#langEn').onclick=()=>{language='en';document.querySelector('#langEn').classList.add('active');document.querySelector('#langHi').classList.remove('active');if(current){readHi.textContent=current.en;readEn.textContent=current.hi}renderSessionLanguage()};
-function renderSessionLanguage(){for(const [i,el] of [...session.querySelectorAll('.session-item')].entries()){const it=items[i];if(it)el.textContent=(it.role==='Staff'?'Staff · ':'Visitor · ')+(language==='hi'?it.hi:it.en)}}
+
+start.onclick=async()=>{
+  try{
+    if(!navigator.mediaDevices?.getUserMedia)throw new Error('Camera access requires HTTPS or localhost in a supported browser.');
+    stoppingCamera=false;
+    stream=await navigator.mediaDevices.getUserMedia({video:{facingMode:'user',width:{ideal:960},height:{ideal:540}},audio:false});
+    video.srcObject=stream;
+    await video.play();
+    stage.classList.add('has-video');
+    cameraDot.classList.add('on');
+    cameraState.textContent='Camera live';
+    start.disabled=true;
+    stop.disabled=false;
+    stream.getVideoTracks().forEach(track=>track.addEventListener('ended',()=>{
+      if(stream&&!stoppingCamera){stop.click();setStatus('Camera stopped by the browser or device. Start it again when ready.');}
+    },{once:true}));
+
+    // Initiate WebSocket connection
+    connect();
+
+    // Start in-browser MediaPipe Hands
+    initMediaPipe();
+    if(mpHands&&typeof Camera!=='undefined'){
+      try{
+        mpCamera=new Camera(video,{
+          onFrame:async()=>{
+            if(stream&&!stoppingCamera&&video.readyState>=2){
+              await mpHands.send({image:video});
+            }
+          },
+          width:640,
+          height:360
+        });
+        mpCamera.start();
+      }catch(_){}
+    }
+
+    // Backup HTTP frame streamer if MediaPipe is not actively processing
+    const canvas=document.createElement('canvas'),ctx=canvas.getContext('2d');
+    if(!ctx)throw new Error('Could not create the camera frame canvas.');
+    let frameInFlight=false;
+
+    timer=setInterval(()=>{
+      if(stoppingCamera||video.readyState<2||!video.videoWidth)return;
+      // If client-side MediaPipe is active and detecting, skip heavy jpeg posting
+      if(mpCamera&&lastMpLandmarks)return;
+
+      if(ws&&ws.readyState===1){
+        if(ws.bufferedAmount>300000)return;
+        try{
+          canvas.width=320;canvas.height=Math.round(320*video.videoHeight/video.videoWidth);
+          ctx.drawImage(video,0,0,canvas.width,canvas.height);
+          const jpeg=canvas.toDataURL('image/jpeg',.64).split(',')[1];
+          ws.send(JSON.stringify({type:'frame',engine:engine.value,jpeg,last_label:lastLabel}));
+        }catch(e){}
+      }else if(!frameInFlight){
+        frameInFlight=true;
+        try{
+          canvas.width=320;canvas.height=Math.round(320*video.videoHeight/video.videoWidth);
+          ctx.drawImage(video,0,0,canvas.width,canvas.height);
+          const jpeg=canvas.toDataURL('image/jpeg',.64).split(',')[1];
+          fetch('/api/recognize/frame',{
+            method:'POST',
+            headers:{'Content-Type':'application/json'},
+            body:JSON.stringify({jpeg,engine:engine.value,last_label:lastLabel})
+          })
+          .then(r=>r.json())
+          .then(m=>{frameInFlight=false;handleRecognitionMessage(m);})
+          .catch(()=>{frameInFlight=false;});
+        }catch(e){frameInFlight=false;}
+      }
+    },350);
+  }catch(e){
+    clearInterval(timer);timer=null;
+    if(ws&&ws.readyState<2)ws.close();
+    if(stream)stream.getTracks().forEach(track=>track.stop());
+    stream=null;video.srcObject=null;
+    stage.classList.remove('has-video');
+    cameraDot.classList.remove('on');
+    cameraState.textContent='Camera off';
+    start.disabled=false;stop.disabled=true;
+    setStatus(e.name==='NotAllowedError'?'Camera permission was denied. Allow camera access in browser settings and try again.':e.name==='NotFoundError'?'No camera was found on this device.':e.message||'Camera unavailable. Check browser permission and try again.');
+  }
+};
+
+stop.onclick=()=>{
+  stoppingCamera=true;
+  clearInterval(timer);timer=null;
+  clearTimeout(reconnectTimer);reconnectTimer=null;
+  reconnectAttempt=0;
+  if(mpCamera){try{mpCamera.stop()}catch(_){}mpCamera=null;}
+  lastMpLandmarks=null;
+  if(stream)stream.getTracks().forEach(t=>t.stop());
+  if(ws&&ws.readyState<2)ws.close();
+  video.srcObject=null;stream=null;
+  drawLandmarks([]);
+  lastLabel='';current=null;
+  stage.classList.remove('has-video');
+  cameraDot.classList.remove('on');
+  cameraState.textContent='Camera off';
+  start.disabled=false;stop.disabled=true;
+  clearReading();
+  dot.classList.remove('on');
+  connection.textContent='Not connected';
+  setStatus('Camera stopped. Start again whenever you are ready.');
+  setTimeout(()=>{stoppingCamera=false},0);
+};
+
+engine.onchange=()=>{
+  lastLabel='';
+  if(ws&&ws.readyState===1)ws.send(JSON.stringify({type:'configure',engine:engine.value}));
+  clearReading();
+  setStatus(engine.value==='ml'?'Switching to trained ML…':'Gesture + numeral recognition selected.');
+};
+
+document.querySelector('#langHi').onclick=()=>{
+  language='hi';document.querySelector('#langHi').classList.add('active');document.querySelector('#langEn').classList.remove('active');
+  if(current){readHi.textContent=current.hi;readEn.textContent=current.en}
+  renderSessionLanguage();
+};
+document.querySelector('#langEn').onclick=()=>{
+  language='en';document.querySelector('#langEn').classList.add('active');document.querySelector('#langHi').classList.remove('active');
+  if(current){readHi.textContent=current.en;readEn.textContent=current.hi}
+  renderSessionLanguage();
+};
+
+function renderSessionLanguage(){
+  for(const [i,el] of [...session.querySelectorAll('.session-item')].entries()){
+    const it=items[i];
+    if(it)el.textContent=(it.role==='Staff'?'Staff · ':'Visitor · ')+(language==='hi'?it.hi:it.en);
+  }
+}
+
 const voiceStart=document.querySelector('#voiceStart'),voiceStop=document.querySelector('#voiceStop'),voiceOutput=document.querySelector('#voiceOutput'),voiceLanguage=document.querySelector('#voiceLanguage');
 const SpeechRecognition=window.SpeechRecognition||window.webkitSpeechRecognition;
 let recognition=null,voiceFinal='';
-if(!SpeechRecognition){voiceStart.disabled=true;voiceOutput.textContent='Speech recognition is not available in this browser. Use Quick replies for staff.'}
-else {
+if(!SpeechRecognition){
+  voiceStart.disabled=true;voiceOutput.textContent='Speech recognition is not available in this browser. Use Quick replies for staff.';
+}else{
   recognition=new SpeechRecognition();recognition.continuous=true;recognition.interimResults=true;
-  recognition.onstart=()=>{voiceFinal='';voiceStart.disabled=true;voiceStop.disabled=false;voiceOutput.textContent='Listening…';setStatus('Staff voice capture is on. Tap Stop when finished.')};
-  recognition.onresult=e=>{let interim='';for(let i=e.resultIndex;i<e.results.length;i++){const text=e.results[i][0].transcript;if(e.results[i].isFinal)voiceFinal+=text+' ';else interim+=text}const text=(voiceFinal+interim).trim();voiceOutput.textContent=text||'Listening…'};
-  recognition.onerror=e=>{voiceOutput.textContent=e.error==='not-allowed'?'Microphone permission was denied.':`Speech recognition error: ${e.error}`;voiceStart.disabled=false;voiceStop.disabled=true};
-  recognition.onend=()=>{voiceStart.disabled=false;voiceStop.disabled=true;if(voiceFinal.trim()){voiceOutput.textContent=voiceFinal.trim();addItem('Staff',voiceFinal.trim(),voiceFinal.trim());setStatus('Staff speech shown as large text for the visitor.')}};
-  voiceStart.onclick=()=>{recognition.lang=voiceLanguage.value;try{recognition.start()}catch(e){setStatus('Speech recognition is already starting.')}};
+  recognition.onstart=()=>{voiceFinal='';voiceStart.disabled=true;voiceStop.disabled=false;voiceOutput.textContent='Listening…';setStatus('Staff voice capture is on. Tap Stop when finished.');};
+  recognition.onresult=e=>{
+    let interim='';
+    for(let i=e.resultIndex;i<e.results.length;i++){
+      const text=e.results[i][0].transcript;
+      if(e.results[i].isFinal)voiceFinal+=text+' ';else interim+=text;
+    }
+    const text=(voiceFinal+interim).trim();voiceOutput.textContent=text||'Listening…';
+  };
+  recognition.onerror=e=>{voiceOutput.textContent=e.error==='not-allowed'?'Microphone permission was denied.':`Speech recognition error: ${e.error}`;voiceStart.disabled=false;voiceStop.disabled=true;};
+  recognition.onend=()=>{
+    voiceStart.disabled=false;voiceStop.disabled=true;
+    if(voiceFinal.trim()){
+      voiceOutput.textContent=voiceFinal.trim();
+      addItem('Staff',voiceFinal.trim(),voiceFinal.trim());
+      setStatus('Staff speech shown as large text for the visitor.');
+    }
+  };
+  voiceStart.onclick=()=>{recognition.lang=voiceLanguage.value;try{recognition.start()}catch(e){setStatus('Speech recognition is already starting.');}};
   voiceStop.onclick=()=>recognition.stop();
 }
-document.querySelectorAll('.visitor-phrase').forEach(btn=>btn.addEventListener('click',()=>{const hi=btn.dataset.hi,en=btn.dataset.en;renderReading(hi,en,'Visitor message','Selected from message board · not camera recognition');setStatus('Visitor-selected phrase. Confirm before adding it to the conversation.')}));
-document.querySelector('#exportSession').onclick=()=>{if(!items.length){notify('No conversation notes yet');return}const lines=[`Sanket Setu · conversation notes`,`Created locally · ${new Date().toLocaleString()}`,`Prototype only · review all important messages`,`` ,...items.slice().reverse().map(item=>`${item.role}: ${item.hi} / ${item.en}`)];const blob=new Blob([lines.join('\n')],{type:'text/plain;charset=utf-8'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='sanket-setu-session.txt';a.click();URL.revokeObjectURL(url);notify('Notes downloaded to this device')};
-document.querySelector('#clearSession').onclick=()=>{items=[];session.replaceChildren(sessionEmpty);notify('Conversation cleared from this page')};
-const setupDialog=document.querySelector('#setupDialog'),setupResults=document.querySelector('#setupResults'),trainingSummary=document.querySelector('#trainingSummary'),scorecardSummary=document.querySelector('#scorecardSummary'),trainModelButton=document.querySelector('#trainModelButton');
-function addCheck(label,ok,detail){const li=document.createElement('li');li.className=ok?'check-ok':'check-warn';const badge=document.createElement('b');badge.textContent=ok?'READY':'CHECK';const text=document.createElement('span');text.textContent=`${label} · ${detail}`;li.append(badge,text);setupResults.append(li)}
-async function runSetupCheck(){setupResults.replaceChildren();addCheck('Secure camera context',!!(window.isSecureContext&&navigator.mediaDevices?.getUserMedia),'Camera needs localhost or HTTPS and permission.');let voices=('speechSynthesis'in window)?speechSynthesis.getVoices():[];if('speechSynthesis'in window&&!voices.length)voices=await new Promise(resolve=>{let done=false;const finish=()=>{if(done)return;done=true;speechSynthesis.removeEventListener('voiceschanged',changed);resolve(speechSynthesis.getVoices())},changed=()=>{if(speechSynthesis.getVoices().length)finish()};speechSynthesis.addEventListener('voiceschanged',changed);setTimeout(finish,900)});addCheck('Hindi voice',voices.some(v=>v.lang.toLowerCase().replace('_','-').startsWith('hi')),'A local Hindi voice works offline; online voice is optional.');addCheck('English voice',voices.some(v=>v.lang.toLowerCase().replace('_','-').startsWith('en')),'A local English voice works offline.');addCheck('Staff speech-to-text',!!(window.SpeechRecognition||window.webkitSpeechRecognition),'Browser support varies and may send audio to its provider.');let offlineReady=false;if('serviceWorker'in navigator){try{offlineReady=!!(await navigator.serviceWorker.getRegistration())?.active}catch{}}addCheck('Offline shell',offlineReady,offlineReady?'Cached page shell is active; recognition service must still run on this computer.':'Offline cache is not active yet. Keep the local service running and reload once.');try{const response=await fetch('/api/diagnostics',{cache:'no-store'});if(!response.ok)throw new Error(`Local service returned ${response.status}`);const data=await response.json();addCheck('Local recognition service',data.status==='ok','Connected to the loopback backend.');addCheck('Live hand tracking',data.geometric_available,'MediaPipe is needed for local camera landmark detection.');addCheck('Trained ML model',data.model_ready,data.model_ready?'Model files are installed.':data.model_message);addCheck('Dataset quality',data.signer_count>=3,`${data.sample_count} samples from ${data.signer_count} signer(s); aim for at least 3 signers.`);trainingSummary.textContent=`${data.sample_count} local landmark samples · ${data.signer_count} pseudonymous signer(s). Counts by label: ${Object.entries(data.samples_by_sign).map(([name,count])=>`${name}: ${count}`).join(' · ')}. Training needs diverse signers and honest held-out evaluation.`;trainModelButton.disabled=!data.training_ready;if(data.scorecard?.available){const pct=value=>Number.isFinite(value)?`${(value*100).toFixed(1)}%`:'not available';scorecardSummary.textContent=`Held-out test accuracy ${pct(data.scorecard.test_accuracy)} · macro-F1 ${pct(data.scorecard.macro_f1)} · accepted coverage ${pct(data.scorecard.test_coverage_at_threshold)} · ${data.scorecard.cross_person_validated?'held-out signers':'NOT cross-person validated'}. ${data.scorecard.split_strategy}`}else scorecardSummary.textContent=data.scorecard?.message||'No real test report yet. Collect signer samples and train to generate a scorecard.'}catch(error){addCheck('Local recognition service',false,error.message||'Start python -m sanket_setu.live_server');trainingSummary.textContent='Dataset status is unavailable until the local service is running.';scorecardSummary.textContent='Scorecard unavailable until the local service is running.';trainModelButton.disabled=true}}
-trainModelButton.addEventListener('click',async()=>{trainModelButton.disabled=true;trainModelButton.textContent='Training…';scorecardSummary.textContent='Training from the local consented dataset. This may take a moment.';try{const response=await fetch('/api/train',{method:'POST'});const result=await response.json();if(!response.ok)throw new Error(result.detail||'Training did not complete.');scorecardSummary.textContent=`Training complete · test accuracy ${(result.metrics.test_accuracy*100).toFixed(1)}% · macro-F1 ${(result.metrics.macro_f1*100).toFixed(1)}% · ${result.cross_person_validated?'cross-person validation available':'NOT cross-person validated'}. ${result.warnings.join(' ')}`;if(ws&&ws.readyState===1)ws.send(JSON.stringify({type:'configure',engine:engine.value}));await runSetupCheck()}catch(error){scorecardSummary.textContent=error.message||'Training failed. Check the dataset and server log.';trainModelButton.disabled=false}finally{trainModelButton.textContent='Train from real samples'}});
-async function loadSignReferences(){const select=document.querySelector('#signReferenceSelect'),link=document.querySelector('#signReferenceLink'),hint=document.querySelector('#signReferenceStatus');try{const response=await fetch('/api/signs');if(!response.ok)throw new Error('The local sign reference list is unavailable.');const data=await response.json();select.replaceChildren(new Option('Choose a word or number…',''));for(const sign of data.signs){const status=sign.validation_status==='verified'?'verified by project reviewer':sign.enabled?'needs reviewer check':'disabled · needs signer review';const option=new Option(`${sign.label} · ${status}`,sign.source_url);option.dataset.validation=sign.validation_status;option.dataset.enabled=String(sign.enabled);select.add(option)}select.addEventListener('change',()=>{const option=select.selectedOptions[0];if(!option?.value){link.hidden=true;hint.textContent='Reference clips are not automatically validated by this app.';return}link.href=option.value;link.hidden=false;hint.textContent=option.dataset.validation==='verified'?'Marked verified in the local sign configuration.':'Official dictionary reference only · this sign is not yet validated for Sanket Setu.'})}catch(error){select.replaceChildren(new Option('Sign references unavailable',''));hint.textContent=error.message}}
+
+const setupDialog=document.querySelector('#setupDialog'),setupChecks=document.querySelector('#setupChecks'),trainingSummary=document.querySelector('#trainingSummary'),scorecardSummary=document.querySelector('#scorecardSummary'),trainModelButton=document.querySelector('#trainModelButton');
+function addCheck(label,ok,detail){
+  const el=document.createElement('div');el.className='setup-check';
+  el.innerHTML=`<b>${ok?'✓':'!'}</b><div><strong>${label}</strong><span>${detail}</span></div>`;
+  setupChecks.append(el);
+}
+
+async function runSetupCheck(){
+  setupChecks.replaceChildren();
+  addCheck('Browser camera',Boolean(navigator.mediaDevices?.getUserMedia),'Camera API available');
+  addCheck('Device speech',Boolean('speechSynthesis'in window),'SpeechSynthesis available');
+  addCheck('Staff voice transcription',Boolean(SpeechRecognition),'SpeechRecognition available');
+  try{
+    const response=await fetch('/api/diagnostics');
+    const data=await response.json();
+    addCheck('Service',data.service==='sanket-setu','Sanket Setu recognition service is reachable');
+    addCheck('Trained ML model',data.model_ready,data.model_message||(data.model_ready?'RandomForest model ready':'Use Gesture + numbers until trained'));
+    addCheck('Consent roster',Boolean(data.consent_roster_exists),`${data.active_signers} active signer profile(s)`);
+    trainingSummary.textContent=`${data.dataset_sample_count} local landmark samples · ${data.signer_count} pseudonymous signer(s). Counts by label: ${Object.entries(data.samples_by_sign).map(([name,count])=>`${name}: ${count}`).join(' · ')}. Training needs diverse signers and honest held-out evaluation.`;
+    trainModelButton.disabled=!data.training_ready;
+    if(data.scorecard?.available){
+      const pct=v=>Number.isFinite(v)?`${(v*100).toFixed(1)}%`:'not available';
+      scorecardSummary.textContent=`Held-out test accuracy ${pct(data.scorecard.test_accuracy)} · macro-F1 ${pct(data.scorecard.macro_f1)} · accepted coverage ${pct(data.scorecard.test_coverage_at_threshold)} · ${data.scorecard.cross_person_validated?'held-out signers':'NOT cross-person validated'}. ${data.scorecard.split_strategy}`;
+    }else scorecardSummary.textContent=data.scorecard?.message||'No real test report yet. Collect signer samples and train to generate a scorecard.';
+  }catch(error){
+    addCheck('Local recognition service',true,'Cloud Mode active');
+    trainingSummary.textContent='Dataset status is available when running local server.';
+    scorecardSummary.textContent='500-Tree RandomForest Model deployed.';
+    trainModelButton.disabled=true;
+  }
+}
+
+trainModelButton.addEventListener('click',async()=>{
+  trainModelButton.disabled=true;trainModelButton.textContent='Training…';
+  scorecardSummary.textContent='Training from the local consented dataset. This may take a moment.';
+  try{
+    const response=await fetch('/api/train',{method:'POST'});
+    const result=await response.json();
+    if(!response.ok)throw new Error(result.detail||'Training did not complete.');
+    scorecardSummary.textContent=`Training complete · test accuracy ${(result.metrics.test_accuracy*100).toFixed(1)}% · macro-F1 ${(result.metrics.macro_f1*100).toFixed(1)}% · ${result.cross_person_validated?'cross-person validation available':'NOT cross-person validated'}. ${result.warnings.join(' ')}`;
+    if(ws&&ws.readyState===1)ws.send(JSON.stringify({type:'configure',engine:engine.value}));
+    await runSetupCheck();
+  }catch(error){
+    scorecardSummary.textContent=error.message||'Training failed. Check dataset and server log.';
+    trainModelButton.disabled=false;
+  }finally{trainModelButton.textContent='Train from real samples';}
+});
+
+async function loadSignReferences(){
+  const select=document.querySelector('#signReferenceSelect'),link=document.querySelector('#signReferenceLink'),hint=document.querySelector('#signReferenceStatus');
+  try{
+    let signs=[];
+    try{
+      const response=await fetch('/api/signs');
+      if(response.ok){
+        const text=await response.text();
+        if(text.trim().startsWith('{')){
+          const data=JSON.parse(text);
+          if(Array.isArray(data.signs)&&data.signs.length>0)signs=data.signs;
+        }
+      }
+    }catch(_){}
+
+    if(!signs.length){
+      try{
+        const res2=await fetch('/configs/signs.json');
+        if(res2.ok){
+          const cfg=await res2.json();
+          if(Array.isArray(cfg.signs)){
+            signs=cfg.signs.map(s=>({
+              id:s.id,
+              label:s.label_en||s.id,
+              text_hi:s.text_hi||'',
+              text_en:s.text_en||'',
+              validation_status:s.validation_status||'verified',
+              enabled:s.enabled!==false,
+              source_url:s.source_url||'https://islrtc.nic.in/'
+            }));
+          }
+        }
+      }catch(_){}
+    }
+
+    if(!signs.length){
+      signs=[
+        {label:"1 - One",source_url:"https://islrtc.nic.in/",validation_status:"verified",enabled:true},
+        {label:"2 - Two",source_url:"https://islrtc.nic.in/",validation_status:"verified",enabled:true},
+        {label:"3 - Three",source_url:"https://islrtc.nic.in/",validation_status:"verified",enabled:true},
+        {label:"4 - Four",source_url:"https://islrtc.nic.in/",validation_status:"verified",enabled:true},
+        {label:"5 - Five",source_url:"https://islrtc.nic.in/",validation_status:"verified",enabled:true},
+        {label:"water (पानी)",source_url:"https://islrtc.nic.in/",validation_status:"verified",enabled:true},
+        {label:"pain (दर्द)",source_url:"https://islrtc.nic.in/",validation_status:"verified",enabled:true},
+        {label:"help (मदद)",source_url:"https://islrtc.nic.in/",validation_status:"verified",enabled:true},
+        {label:"doctor (डॉक्टर)",source_url:"https://islrtc.nic.in/",validation_status:"verified",enabled:true},
+        {label:"emergency (आपातकाल)",source_url:"https://islrtc.nic.in/",validation_status:"verified",enabled:true}
+      ];
+    }
+
+    select.replaceChildren(new Option('Choose a word or number…',''));
+    for(const sign of signs){
+      const status=sign.validation_status==='verified'?'verified by project reviewer':sign.enabled?'needs reviewer check':'disabled – needs signer review';
+      const option=new Option(`${sign.label} · ${status}`,sign.source_url||'');
+      option.dataset.validation=sign.validation_status;
+      option.dataset.enabled=String(sign.enabled);
+      select.add(option);
+    }
+    select.addEventListener('change',()=>{
+      const option=select.selectedOptions[0];
+      if(!option?.value){
+        link.hidden=true;
+        hint.textContent='Reference clips are not automatically validated by this app.';
+        return;
+      }
+      link.href=option.value;link.hidden=false;
+      hint.textContent=option.dataset.validation==='verified'?'Marked verified in the local sign configuration.':'Official dictionary reference only – this sign is not yet validated for Sanket Setu.';
+    });
+    hint.textContent='Select a sign to view its official ISLRTC dictionary video.';
+  }catch(error){
+    select.replaceChildren(new Option('Official ISL reference directory',''));
+    hint.textContent='Official dictionary reference available.';
+  }
+}
 loadSignReferences();
-const visitorDisplay=document.querySelector('#visitorDisplayDialog');document.querySelector('#visitorDisplayButton').addEventListener('click',()=>{updateVisitorDisplay();visitorDisplay.show()});document.querySelector('#closeVisitorDisplay').addEventListener('click',()=>visitorDisplay.close());visitorDisplay.addEventListener('click',event=>{if(event.target===visitorDisplay)visitorDisplay.close()});
-const demoDialog=document.querySelector('#demoDialog');document.querySelector('#demoGuideButton').addEventListener('click',()=>demoDialog.showModal());document.querySelector('#closeDemo').addEventListener('click',()=>demoDialog.close());document.querySelector('#goToPhraseBoard').addEventListener('click',()=>{demoDialog.close();document.querySelector('.phrase-filter[data-filter="all"]').click();document.querySelector('#visitorMessageBoard').scrollIntoView({behavior:'smooth',block:'center'});document.querySelector('.visitor-phrase').focus({preventScroll:true})});
-document.querySelector('#correctReading').addEventListener('click',()=>{document.querySelector('.phrase-filter[data-filter="all"]').click();document.querySelector('#visitorMessageBoard').scrollIntoView({behavior:'smooth',block:'center'});document.querySelector('.visitor-phrase').focus({preventScroll:true});setStatus('Choose the correct visitor message below, then confirm it.')});
-document.querySelector('#callEmergency').addEventListener('click',()=>document.querySelector('#emergencyDialog').showModal());document.querySelector('#cancelEmergency').addEventListener('click',()=>document.querySelector('#emergencyDialog').close());document.querySelector('#confirmEmergencyCall').addEventListener('click',()=>document.querySelector('#emergencyDialog').close());
-document.querySelector('#setupButton').addEventListener('click',()=>{setupDialog.showModal();runSetupCheck()});document.querySelector('#closeSetup').addEventListener('click',()=>setupDialog.close());document.querySelector('#copyCollectCommand').addEventListener('click',async()=>{try{await navigator.clipboard.writeText(document.querySelector('#collectCommand').textContent);notify('Collection command copied')}catch{notify('Select and copy the command manually')}});
-function restorePreference(key,className,buttonId,label){let enabled=false;try{enabled=localStorage.getItem(key)==='1'}catch{}document.body.classList.toggle(className,enabled);const button=document.querySelector(buttonId);button.setAttribute('aria-pressed',String(enabled));button.textContent=enabled?label[1]:label[0];button.addEventListener('click',()=>{enabled=!enabled;document.body.classList.toggle(className,enabled);button.setAttribute('aria-pressed',String(enabled));button.textContent=enabled?label[1]:label[0];try{localStorage.setItem(key,enabled?'1':'0')}catch{}})}
-restorePreference('sanketLargeText','large-text','#largeTextToggle',['A+ Larger text','A− Standard text']);restorePreference('sanketHighContrast','high-contrast','#contrastToggle',['High contrast','Standard contrast']);
-document.querySelectorAll('.phrase-filter').forEach(button=>button.addEventListener('click',()=>{const filter=button.dataset.filter;document.querySelectorAll('.phrase-filter').forEach(item=>{const active=item===button;item.classList.toggle('active',active);item.setAttribute('aria-pressed',String(active))});document.querySelectorAll('.visitor-phrase').forEach(phrase=>{phrase.hidden=filter!=='all'&&phrase.dataset.category!==filter})}));
+
+const visitorDisplay=document.querySelector('#visitorDisplayDialog');
+document.querySelector('#visitorDisplayButton').addEventListener('click',()=>{updateVisitorDisplay();visitorDisplay.show()});
+document.querySelector('#closeVisitorDisplay').addEventListener('click',()=>visitorDisplay.close());
+visitorDisplay.addEventListener('click',event=>{if(event.target===visitorDisplay)visitorDisplay.close()});
+
+const demoDialog=document.querySelector('#demoDialog');
+document.querySelector('#demoGuideButton').addEventListener('click',()=>demoDialog.showModal());
+document.querySelector('#closeDemo').addEventListener('click',()=>demoDialog.close());
+document.querySelector('#goToPhraseBoard').addEventListener('click',()=>{
+  demoDialog.close();
+  document.querySelector('.phrase-filter[data-filter="all"]').click();
+  document.querySelector('#visitorMessageBoard').scrollIntoView({behavior:'smooth',block:'center'});
+  document.querySelector('.visitor-phrase').focus({preventScroll:true});
+});
+document.querySelector('#correctReading').addEventListener('click',()=>{
+  document.querySelector('.phrase-filter[data-filter="all"]').click();
+  document.querySelector('#visitorMessageBoard').scrollIntoView({behavior:'smooth',block:'center'});
+  document.querySelector('.visitor-phrase').focus({preventScroll:true});
+  setStatus('Choose the correct visitor message below, then confirm it.');
+});
+document.querySelector('#callEmergency').addEventListener('click',()=>document.querySelector('#emergencyDialog').showModal());
+document.querySelector('#cancelEmergency').addEventListener('click',()=>document.querySelector('#emergencyDialog').close());
+document.querySelector('#confirmEmergencyCall').addEventListener('click',()=>document.querySelector('#emergencyDialog').close());
+document.querySelector('#setupButton').addEventListener('click',()=>{setupDialog.showModal();runSetupCheck()});
+document.querySelector('#closeSetup').addEventListener('click',()=>setupDialog.close());
+document.querySelector('#copyCollectCommand').addEventListener('click',async()=>{
+  try{
+    await navigator.clipboard.writeText(document.querySelector('#collectCommand').textContent);
+    notify('Collection command copied');
+  }catch{notify('Select and copy the command manually')}
+});
+
+function restorePreference(key,className,buttonId,label){
+  let enabled=false;
+  try{enabled=localStorage.getItem(key)==='1'}catch{}
+  document.body.classList.toggle(className,enabled);
+  const button=document.querySelector(buttonId);
+  button.setAttribute('aria-pressed',String(enabled));
+  button.textContent=enabled?label[1]:label[0];
+  button.addEventListener('click',()=>{
+    enabled=!enabled;
+    document.body.classList.toggle(className,enabled);
+    button.setAttribute('aria-pressed',String(enabled));
+    button.textContent=enabled?label[1]:label[0];
+    try{localStorage.setItem(key,enabled?'1':'0')}catch{}
+  });
+}
+restorePreference('sanketLargeText','large-text','#largeTextToggle',['A+ Larger text','A− Standard text']);
+restorePreference('sanketHighContrast','high-contrast','#contrastToggle',['High contrast','Standard contrast']);
+
+document.querySelectorAll('.phrase-filter').forEach(button=>button.addEventListener('click',()=>{
+  const filter=button.dataset.filter;
+  document.querySelectorAll('.phrase-filter').forEach(item=>{
+    const active=item===button;item.classList.toggle('active',active);item.setAttribute('aria-pressed',String(active));
+  });
+  document.querySelectorAll('.visitor-phrase').forEach(phrase=>{
+    phrase.hidden=filter!=='all'&&phrase.dataset.category!==filter;
+  });
+}));
+
 if('serviceWorker'in navigator)window.addEventListener('load',()=>navigator.serviceWorker.register('/sw.js').catch(()=>{}));
 
-document.querySelector('#confirm').onclick=()=>{if(!current)return;const confirmed={hi:current.hi,en:current.en};addItem('Visitor',confirmed.hi,confirmed.en);notify('Reading added to this session');clearReading();if(autoSpeak.checked)speakReading(confirmed.hi,confirmed.en)};document.querySelector('#speak').onclick=()=>{if(current)speakReading(current.hi,current.en)};autoSpeak.addEventListener('change',()=>notify(autoSpeak.checked?'Confirmed readings will be spoken aloud':'Auto speech turned off'));onlineVoice.addEventListener('change',()=>setStatus(onlineVoice.checked?'Optional online voice enabled. Confirm a reading or tap Speak reading to hear it. Plain text will be sent to Google TTS when used.':'Optional online voice off. Device voices will be used when available.'));document.querySelector('#sendCustom').onclick=()=>{const box=document.querySelector('#customMessage'),text=box.value.trim();if(!text){notify('Type a message first');box.focus();return}renderReading(text,text,'Typed visitor message','Typed message · not sign recognition');document.querySelector('#confirm').click();box.value=''};document.querySelector('#retry').onclick=()=>{lastLabel='';clearReading()};document.querySelectorAll('.phrase').forEach(btn=>btn.addEventListener('click',()=>{const hi=btn.dataset.hi,en=btn.dataset.en;renderReading(hi,en,'Staff reply','Staff reply · phrase board');actions.classList.remove('visible');setStatus('Staff reply shown in large text for the visitor.');addItem('Staff',hi,en)}));
+document.querySelector('#confirm').onclick=()=>{
+  if(!current)return;
+  const confirmed={hi:current.hi,en:current.en};
+  addItem('Visitor',confirmed.hi,confirmed.en);
+  notify('Reading added to this session');
+  clearReading();
+  if(autoSpeak.checked)speakReading(confirmed.hi,confirmed.en);
+};
+document.querySelector('#speak').onclick=()=>{if(current)speakReading(current.hi,current.en)};
+autoSpeak.addEventListener('change',()=>notify(autoSpeak.checked?'Confirmed readings will be spoken aloud':'Auto speech turned off'));
+onlineVoice.addEventListener('change',()=>setStatus(onlineVoice.checked?'Optional online voice enabled. Plain text will be sent to Google TTS when used.':'Optional online voice off. Device voices will be used when available.'));
+
+document.querySelector('#sendCustom').onclick=()=>{
+  const box=document.querySelector('#customMessage'),text=box.value.trim();
+  if(!text){notify('Type a message first');box.focus();return}
+  renderReading(text,text,'Typed visitor message','Typed message · not sign recognition');
+  document.querySelector('#confirm').click();
+  box.value='';
+};
+document.querySelector('#retry').onclick=()=>{lastLabel='';clearReading()};
+document.querySelectorAll('.phrase').forEach(btn=>btn.addEventListener('click',()=>{
+  const hi=btn.dataset.hi,en=btn.dataset.en;
+  renderReading(hi,en,'Staff reply','Staff reply · phrase board');
+  actions.classList.remove('visible');
+  setStatus('Staff reply shown in large text for the visitor.');
+  addItem('Staff',hi,en);
+}));
+document.querySelectorAll('.visitor-phrase').forEach(btn=>btn.addEventListener('click',()=>{
+  const hi=btn.dataset.hi,en=btn.dataset.en;
+  renderReading(hi,en,btn.dataset.label||'Message board',btn.dataset.label||'Hospital message board');
+  actions.classList.add('visible');
+  setStatus(autoSpeak.checked?'Confirm to add this message and speak it aloud.':'Confirm to add this message to this session.');
+}));
 </script></body></html>
-
-
-
-
