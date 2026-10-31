@@ -1,0 +1,81 @@
+{
+  "trained_at": "2026-10-31T07:52:33+00:00",
+  "model": "RandomForestClassifier(n_estimators=500, class_weight=balanced, seed=42)",
+  "class_order": [
+    "none",
+    "num_1",
+    "num_2",
+    "num_3",
+    "num_4",
+    "num_5"
+  ],
+  "feature_schema": {
+    "n_features": 63,
+    "layout": "21 landmarks x (x,y,z), wrist-relative, scaled by wrist->middle MCP"
+  },
+  "config_version": "1.0-real-vocabulary",
+  "split_strategy": "group split by signer_id (held-out signers)",
+  "cross_person_validated": true,
+  "warnings": [],
+  "reject_threshold": 0.65,
+  "library_versions": {
+    "scikit-learn": "1.7.1",
+    "numpy": "2.2.6",
+    "mediapipe": "0.10.14"
+  },
+  "data_hash": "28dadc0cb3ebffae286babb2dae5d53272e47d0a589d94e781766c572075356a",
+  "metrics": {
+    "test_accuracy": 1.0,
+    "macro_f1": 1.0,
+    "test_coverage_at_threshold": 0.9962962962962963,
+    "test_accuracy_on_accepted": 1.0,
+    "n_test": 1080
+  },
+  "per_signer": {
+    "S01": {
+      "n_test_samples": 360,
+      "accuracy": 1.0,
+      "accuracy_on_accepted": 1.0,
+      "labels_present": [
+        "none",
+        "num_1",
+        "num_2",
+        "num_3",
+        "num_4",
+        "num_5"
+      ]
+    },
+    "S02": {
+      "n_test_samples": 360,
+      "accuracy": 1.0,
+      "accuracy_on_accepted": 1.0,
+      "labels_present": [
+        "none",
+        "num_1",
+        "num_2",
+        "num_3",
+        "num_4",
+        "num_5"
+      ]
+    },
+    "S06": {
+      "n_test_samples": 360,
+      "accuracy": 1.0,
+      "accuracy_on_accepted": 1.0,
+      "labels_present": [
+        "none",
+        "num_1",
+        "num_2",
+        "num_3",
+        "num_4",
+        "num_5"
+      ]
+    }
+  },
+  "held_out_signers": [
+    "S01",
+    "S02",
+    "S06"
+  ],
+  "score_semantics": "Values from predict_proba are an UNCALIBRATED RandomForest score, not a real-world probability and not accuracy. The reject threshold was tuned on the validation partition only and applied unchanged to the test partition."
+}

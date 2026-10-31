@@ -1,0 +1,65 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&family=Noto+Sans+Devanagari:wght@500;700&display=swap');
+:root{--night:#0E0B2E;--indigo:#312E81;--iris:#4F46E5;--saffron:#FF9933;--mist:#F5F4FF;--line:#E0E0F5;--ink:#1B1A4A;--soft:#6B6A99}
+html,body,.stApp,button,input{font-family:'Plus Jakarta Sans','Noto Sans Devanagari','Hind',system-ui,sans-serif}
+.stApp{background:var(--mist)}
+[data-testid="stSidebar"],[data-testid="stSidebarCollapsedControl"],[data-testid="stToolbar"]{display:none}
+[data-testid="stHeader"]{display:none}
+.block-container{max-width:1120px;padding-top:1.4rem}
+.brand{display:flex;align-items:center;gap:.55rem;font-weight:800;font-size:1.1rem;color:var(--ink);padding-top:.2rem}.brand img{width:36px;height:36px;border-radius:9px}
+div.hero{display:grid;grid-template-columns:1.25fr .75fr;gap:1rem;align-items:center;margin-top:.6rem;color:#fff;border-radius:28px;padding:2.6rem 2.8rem;overflow:hidden;background:radial-gradient(800px 380px at 88% 8%,#5B4FE066,transparent 62%),linear-gradient(135deg,var(--night),var(--indigo))}
+div.hero h1{font-size:3.7rem!important;line-height:1.05;font-weight:800;margin:.9rem 0 .3rem!important;padding:0!important;color:#fff!important}
+div.hero .dev{display:block;font-size:1.7rem;color:var(--saffron);font-weight:700;margin-top:.35rem}
+div.hero .lead{font-size:1.18rem;color:#D8D6FF!important;max-width:34rem;margin:-.9rem 0 1rem}
+.pill{display:inline-block;padding:.3rem .85rem;border:1px solid #ffffff44;border-radius:99px;font-size:.8rem;color:#E4E2FF}
+.chips span{display:inline-block;margin:.3rem .4rem 0 0;padding:.38rem .85rem;border-radius:99px;background:#ffffff1a;font-size:.85rem;font-weight:600;color:#fff}
+.hero-art svg{width:100%;height:auto;max-height:380px}
+.hero-art .tip{animation:pulse 2.4s ease-in-out infinite}
+@keyframes pulse{0%,100%{r:5;opacity:1}50%{r:9;opacity:.5}}
+@media (prefers-reduced-motion:reduce){.hero-art .tip{animation:none}}
+@media (max-width:800px){div.hero{grid-template-columns:1fr;padding:1.6rem}div.hero h1{font-size:2.6rem!important}.hero-art{display:none}.flow,.cards{grid-template-columns:1fr!important}}
+.sec{font-size:1.5rem;font-weight:800;color:var(--ink);margin:2rem 0 .7rem}
+.flow{display:grid;grid-template-columns:repeat(5,1fr);gap:.8rem}
+.flow div{position:relative;background:#fff;border:1px solid var(--line);border-radius:18px;padding:1rem .6rem;text-align:center;font-weight:700;color:var(--ink);font-size:.93rem}
+.flow div b{display:block;font-size:1.7rem;margin-bottom:.2rem}
+.flow div small{display:block;color:var(--soft);font-weight:500;margin-top:.15rem}
+.flow div:not(:last-child):after{content:"›";position:absolute;right:-.65rem;top:34%;color:var(--saffron);font-size:1.8rem;font-weight:800}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+.card{background:#fff;border:1px solid var(--line);border-radius:20px;padding:1.3rem;color:var(--ink)}
+.card b{font-size:1.05rem}.card p{margin:.4rem 0 0;color:var(--soft);font-size:.93rem}
+.notice{background:#FFF7E6;border:1px solid #FFD89A;color:#7A4A00;border-radius:14px;padding:.7rem 1rem;margin:.9rem 0;font-size:.9rem}
+.foot{margin:2rem 0 .5rem;text-align:center;color:var(--soft);font-size:.85rem}
+.result{display:flex;flex-direction:column;justify-content:center;text-align:center;min-height:230px;border-radius:24px;padding:1.8rem;color:#fff;background:linear-gradient(135deg,var(--night),var(--indigo))}
+.result .hi{font-size:4.2rem;font-weight:800;line-height:1.15;color:#fff}
+.result .en{font-size:1.6rem;color:#D8D6FF;font-weight:600}
+.result .meta{margin-top:1rem;font-size:.82rem;color:#B8B5F5}
+.result.big .hi{font-size:3rem}.result.big{min-height:200px}
+.result.empty{background:#fff;color:var(--soft);border:2px dashed var(--line);font-weight:600}
+.tag{display:inline-block;border-radius:99px;padding:.15rem .65rem;font-size:.75rem;font-weight:700}
+.tag.review{background:#FEF3C7;color:#92400E}.tag.ok{background:#CCFBF1;color:#0F766E}.tag.na{background:#E5E7EB;color:#374151}
+.signs{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:1rem}
+.sign{background:#fff;border:1px solid var(--line);border-radius:20px;padding:1.2rem;text-align:center}
+.sign .hi{font-size:2.6rem;font-weight:800;color:var(--iris);line-height:1.2}.sign .en{font-weight:700;color:var(--ink);margin-bottom:.5rem}
+.stButton>button,.stDownloadButton>button{border-radius:14px;min-height:3.2rem;font-weight:700;font-size:1.02rem;border:1.5px solid var(--line);background:#fff;color:var(--ink);transition:.15s}
+.stButton>button:hover{border-color:var(--iris);color:var(--iris);transform:translateY(-1px)}
+.stButton>button[kind="primary"]{background:linear-gradient(135deg,var(--iris),var(--indigo));color:#fff;border:0}
+.stButton>button[kind="primary"]:hover{color:#fff;filter:brightness(1.1)}
+[data-testid="stRadioGroup"]{gap:.4rem;flex-wrap:wrap}
+[data-testid="stRadioOption"]{background:#fff;border:1.5px solid var(--line);border-radius:99px;padding:.4rem 1.05rem;margin:0;cursor:pointer}
+[data-testid="stRadioOption"]>div>div>div:first-child{display:none}
+[data-testid="stRadioOption"][data-selected="true"]{background:var(--indigo);border-color:var(--indigo)}
+[data-testid="stRadioOption"][data-selected="true"] p{color:#fff}
+[data-testid="stRadioOption"] p{font-weight:700}
+[data-testid="stMetric"]{background:#fff;border:1px solid var(--line);border-radius:18px;padding:1rem}
+
+/* --- vocabulary evidence blocks --- */
+.sub{font-size:1.15rem;font-weight:800;color:var(--ink);margin:2.2rem 0 .5rem;display:flex;align-items:center;gap:.6rem}
+.sub:after{content:"";flex:1;height:1px;background:var(--line)}
+.sign .src{margin-top:.55rem;font-size:.72rem;color:var(--soft);line-height:1.4}
+.sign .src a{color:var(--iris);text-decoration:none;font-weight:700}
+.sign .src a:hover{text-decoration:underline}
+.card p{line-height:1.55}
+.result .meta{line-height:1.6}
+[data-testid="stExpander"] details{border:1px solid var(--line);border-radius:14px;background:#fff}
+[data-testid="stExpander"] summary{font-weight:700;color:var(--ink)}
+[data-testid="stDataFrame"]{border-radius:14px;overflow:hidden}
+.stAlert{border-radius:14px}

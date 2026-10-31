@@ -1,0 +1,247 @@
+{
+  "test_accuracy": 1.0,
+  "macro_precision": 1.0,
+  "macro_recall": 1.0,
+  "macro_f1": 1.0,
+  "reject_threshold": 0.65,
+  "test_coverage_at_threshold": 0.9962962962962963,
+  "test_accuracy_on_accepted": 1.0,
+  "per_class": {
+    "none": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 180.0
+    },
+    "num_1": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 180.0
+    },
+    "num_2": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 180.0
+    },
+    "num_3": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 180.0
+    },
+    "num_4": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 180.0
+    },
+    "num_5": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 180.0
+    },
+    "accuracy": 1.0,
+    "macro avg": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 1080.0
+    },
+    "weighted avg": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 1080.0
+    }
+  },
+  "confusion_matrix": {
+    "labels": [
+      "none",
+      "num_1",
+      "num_2",
+      "num_3",
+      "num_4",
+      "num_5"
+    ],
+    "matrix": [
+      [
+        180,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        180,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        180,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        180,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        180,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        180
+      ]
+    ]
+  },
+  "n_train": 1080,
+  "n_val": 720,
+  "n_test": 1080,
+  "class_counts": {
+    "none": 480,
+    "num_1": 480,
+    "num_2": 480,
+    "num_3": 480,
+    "num_4": 480,
+    "num_5": 480
+  },
+  "signers": 8,
+  "sessions": 24,
+  "per_signer": {
+    "S01": {
+      "n_test_samples": 360,
+      "accuracy": 1.0,
+      "accuracy_on_accepted": 1.0,
+      "labels_present": [
+        "none",
+        "num_1",
+        "num_2",
+        "num_3",
+        "num_4",
+        "num_5"
+      ]
+    },
+    "S02": {
+      "n_test_samples": 360,
+      "accuracy": 1.0,
+      "accuracy_on_accepted": 1.0,
+      "labels_present": [
+        "none",
+        "num_1",
+        "num_2",
+        "num_3",
+        "num_4",
+        "num_5"
+      ]
+    },
+    "S06": {
+      "n_test_samples": 360,
+      "accuracy": 1.0,
+      "accuracy_on_accepted": 1.0,
+      "labels_present": [
+        "none",
+        "num_1",
+        "num_2",
+        "num_3",
+        "num_4",
+        "num_5"
+      ]
+    }
+  },
+  "held_out_signers": [
+    "S01",
+    "S02",
+    "S06"
+  ],
+  "samples_per_signer_per_class": {
+    "S01": {
+      "none": 60,
+      "num_1": 60,
+      "num_2": 60,
+      "num_3": 60,
+      "num_4": 60,
+      "num_5": 60
+    },
+    "S02": {
+      "none": 60,
+      "num_1": 60,
+      "num_2": 60,
+      "num_3": 60,
+      "num_4": 60,
+      "num_5": 60
+    },
+    "S03": {
+      "none": 60,
+      "num_1": 60,
+      "num_2": 60,
+      "num_3": 60,
+      "num_4": 60,
+      "num_5": 60
+    },
+    "S04": {
+      "none": 60,
+      "num_1": 60,
+      "num_2": 60,
+      "num_3": 60,
+      "num_4": 60,
+      "num_5": 60
+    },
+    "S05": {
+      "none": 60,
+      "num_1": 60,
+      "num_2": 60,
+      "num_3": 60,
+      "num_4": 60,
+      "num_5": 60
+    },
+    "S06": {
+      "none": 60,
+      "num_1": 60,
+      "num_2": 60,
+      "num_3": 60,
+      "num_4": 60,
+      "num_5": 60
+    },
+    "S07": {
+      "none": 60,
+      "num_1": 60,
+      "num_2": 60,
+      "num_3": 60,
+      "num_4": 60,
+      "num_5": 60
+    },
+    "S08": {
+      "none": 60,
+      "num_1": 60,
+      "num_2": 60,
+      "num_3": 60,
+      "num_4": 60,
+      "num_5": 60
+    }
+  },
+  "split_strategy": "group split by signer_id (held-out signers)",
+  "warnings": []
+}

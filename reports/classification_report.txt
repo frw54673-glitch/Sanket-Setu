@@ -1,0 +1,15 @@
+Split: group split by signer_id (held-out signers)
+Cross-person validated: True
+
+              precision    recall  f1-score   support
+
+        none       1.00      1.00      1.00       180
+       num_1       1.00      1.00      1.00       180
+       num_2       1.00      1.00      1.00       180
+       num_3       1.00      1.00      1.00       180
+       num_4       1.00      1.00      1.00       180
+       num_5       1.00      1.00      1.00       180
+
+    accuracy                           1.00      1080
+   macro avg       1.00      1.00      1.00      1080
+weighted avg       1.00      1.00      1.00      1080

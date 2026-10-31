@@ -1,0 +1,364 @@
+{
+  "config_version": "1.0-real-vocabulary",
+  "dictionary": {
+    "name": "Indian Sign Language Dictionary (ISLRTC, DEPwD, Ministry of Social Justice & Empowerment)",
+    "landing_url": "https://islrtc.nic.in/isl-dictionary/",
+    "lookup_url_template": "https://divyangjan.depwd.gov.in/islrtc/search.php?search={term}",
+    "video_mirror_drive": "https://drive.google.com/drive/folders/1U-Pr4r1-cupgNOOq9NH_uTsQnPSVEKco",
+    "video_mirror_youtube": "https://www.youtube.com/@ISLRTC",
+    "format": "video only",
+    "note": "The official ISL Dictionary is a VIDEO dictionary. It publishes no written handshape, movement or notation, and exposes no machine-readable API. There is therefore no automated way to confirm what a sign looks like: every meaning and handshape below must be confirmed against the video by a Deaf signer or a qualified ISL interpreter. Automated verification was attempted and is not possible - do not claim otherwise."
+  },
+  "_review_protocol": {
+    "why_human_validation_is_mandatory": [
+      "The official ISL Dictionary is video-only; no text/handshape API exists (ISLRTC FAQ Q18-Q21).",
+      "Published sources DISAGREE on some signs. Example: 'HELP' appears in a curated list of 140 static ISL signs (IITM thesis 'Gesture Classification of Indian Sign Language'), while Zeshan (2003) and the People's Linguistic Survey of India describe it as a DIRECTIONAL sign whose meaning changes with movement direction. This is exactly why a model cannot be trusted to learn the right thing from a static frame.",
+      "ISL has regional variation. ISLRTC records regional variants of numerals and colour terms (Hyderabad, Mumbai, Kolkata, Munger/Bihar, Manipur).",
+      "Several everyday English words have NO single-hand static manual form in ISL at all: 'yes' is signed by a head nod with no manual component (Zeshan 2003), and 'thank you', 'money', 'pain', 'accident', 'allergy' are documented as dynamic hand gestures."
+    ],
+    "how_to_verify_one_sign": [
+      "1. Open the dictionary lookup URL for the term and watch the sign video.",
+      "2. Record which variant you are fixing as canonical (the dictionary shows 'Sign 1', 'Sign 2', ...).",
+      "3. Confirm: (a) the meaning matches the intended one, (b) it uses ONE hand, (c) it is STATIC (no movement, no change of handshape, no repeated motion), (d) the handshape is stable enough to photograph.",
+      "4. Only then set validation_status to 'verified' and write your real name/role in 'validator'.",
+      "5. Capture your own consented reference photo and store it locally (never commit it)."
+    ],
+    "never_do": [
+      "Never set 'validator' to a name that did not actually review the sign.",
+      "Never mark a sign verified on the basis of a web page, a video, or this repository alone.",
+      "Never enable a sign whose static/one-hand classification is still unconfirmed by a human."
+    ]
+  },
+  "signs": [
+    {
+      "id": "none",
+      "label_en": "No sign / background",
+      "text_hi": "",
+      "text_en": "",
+      "sign_type": "background",
+      "validation_status": "n/a",
+      "source_url": "",
+      "validator": "n/a",
+      "notes": "Rejection class. A visible hand that is NOT one of the supported signs (relaxed hand, mid-transition, or any sign outside the vocabulary). The model needs this class so it can refuse to guess instead of forcing a label.",
+      "enabled": true,
+      "type_evidence": "Engineered class, not an ISL sign.",
+      "type_confidence": "high",
+      "dictionary_category": "",
+      "variants_available": false,
+      "verification_checklist": []
+    },
+    {
+      "id": "num_1",
+      "label_en": "One",
+      "text_hi": "एक",
+      "text_en": "One",
+      "sign_type": "static_single_hand",
+      "validation_status": "needs_review",
+      "source_url": "https://divyangjan.depwd.gov.in/islrtc/search.php?search=One",
+      "validator": "not yet reviewed",
+      "notes": "Iconic one-handed numeral: index finger extended, other fingers folded. Needed at every help desk (token number, number of people in queue).",
+      "enabled": true,
+      "type_evidence": "ISL numerals one to five are iconic and one-handed, shown by raising the corresponding number of fingers starting from the index. Documented for Indian varieties in Glottolog/Siemens et al., 'Cardinal numerals in rural sign languages' (numerals 1-5 shown iconically with the corresponding number of extended fingers), and in the ISL numbers lesson series (CADRRE / Pragya Gupta, ISL 101).",
+      "type_confidence": "high",
+      "dictionary_category": "Everyday",
+      "variants_available": true,
+      "verification_checklist": [
+        "Watch the ISL Dictionary video for 'One' and note which variant is used.",
+        "Confirm the numeral is shown with one hand and without repeated movement.",
+        "Check whether a regional variant differs; record which region the team is targeting."
+      ]
+    },
+    {
+      "id": "num_2",
+      "label_en": "Two",
+      "text_hi": "दो",
+      "text_en": "Two",
+      "sign_type": "static_single_hand",
+      "validation_status": "needs_review",
+      "source_url": "https://divyangjan.depwd.gov.in/islrtc/search.php?search=Two",
+      "validator": "not yet reviewed",
+      "notes": "Iconic one-handed numeral: index and middle finger extended.",
+      "enabled": true,
+      "type_evidence": "Same source basis as 'One': ISL numerals one to five are iconic and one-handed, shown by raising the corresponding number of fingers starting from the index.",
+      "type_confidence": "high",
+      "dictionary_category": "Everyday",
+      "variants_available": true,
+      "verification_checklist": [
+        "Watch the ISL Dictionary video for 'Two' and note which variant is used.",
+        "Confirm one hand, no repeated movement.",
+        "Check for regional variants."
+      ]
+    },
+    {
+      "id": "num_3",
+      "label_en": "Three",
+      "text_hi": "तीन",
+      "text_en": "Three",
+      "sign_type": "static_single_hand",
+      "validation_status": "needs_review",
+      "source_url": "https://divyangjan.depwd.gov.in/islrtc/search.php?search=Three",
+      "validator": "not yet reviewed",
+      "notes": "Iconic one-handed numeral: index, middle and ring finger extended.",
+      "enabled": true,
+      "type_evidence": "Same source basis as 'One': ISL numerals one to five are iconic and one-handed.",
+      "type_confidence": "high",
+      "dictionary_category": "Everyday",
+      "variants_available": true,
+      "verification_checklist": [
+        "Watch the ISL Dictionary video for 'Three' and note which variant is used.",
+        "Confirm one hand, no repeated movement.",
+        "Check for regional variants."
+      ]
+    },
+    {
+      "id": "num_4",
+      "label_en": "Four",
+      "text_hi": "चार",
+      "text_en": "Four",
+      "sign_type": "static_single_hand",
+      "validation_status": "needs_review",
+      "source_url": "https://divyangjan.depwd.gov.in/islrtc/search.php?search=Four",
+      "validator": "not yet reviewed",
+      "notes": "Iconic one-handed numeral: four fingers extended, thumb folded.",
+      "enabled": true,
+      "type_evidence": "Same source basis as 'One': ISL numerals one to five are iconic and one-handed.",
+      "type_confidence": "high",
+      "dictionary_category": "Everyday",
+      "variants_available": true,
+      "verification_checklist": [
+        "Watch the ISL Dictionary video for 'Four' and note which variant is used.",
+        "Confirm one hand, no repeated movement.",
+        "Check for regional variants."
+      ]
+    },
+    {
+      "id": "num_5",
+      "label_en": "Five",
+      "text_hi": "पाँच",
+      "text_en": "Five",
+      "sign_type": "static_single_hand",
+      "validation_status": "needs_review",
+      "source_url": "https://divyangjan.depwd.gov.in/islrtc/search.php?search=Five",
+      "validator": "not yet reviewed",
+      "notes": "Iconic one-handed numeral: all five fingers extended, palm forward.",
+      "enabled": true,
+      "type_evidence": "Same source basis as 'One'. Note the published caveat that a second articulation of FIVE closes the palm (internal movement); the iconic open-palm variant is the one targeted here and must be confirmed.",
+      "type_confidence": "high",
+      "dictionary_category": "Everyday",
+      "variants_available": true,
+      "verification_checklist": [
+        "Watch the ISL Dictionary video for 'Five'. Note that a variant with internal palm movement exists; fix the open-palm variant.",
+        "Confirm one hand and a stable, photographable handshape.",
+        "Check for regional variants."
+      ]
+    },
+    {
+      "id": "doctor",
+      "label_en": "Doctor",
+      "text_hi": "डॉक्टर",
+      "text_en": "Doctor",
+      "sign_type": "static_single_hand",
+      "validation_status": "needs_review",
+      "source_url": "https://divyangjan.depwd.gov.in/islrtc/search.php?search=Doctor",
+      "validator": "not yet reviewed",
+      "notes": "Candidate for the medical help desk. Deliberately DISABLED until an interpreter confirms the one-hand static form.",
+      "enabled": false,
+      "type_evidence": "In the peer-reviewed ISL emergency-words dataset (Das et al., 'Hand gestures for emergency situations', PMC7378574) the eight words accident, call, doctor, help, hot, lose, pain and thief are documented, and the paper states: 'All the words included in this dataset except the word doctor are dynamic hand gestures.' That makes DOCTOR the one clearly static candidate of the set.",
+      "type_confidence": "medium",
+      "dictionary_category": "Medical",
+      "variants_available": true,
+      "verification_checklist": [
+        "Watch the ISL Dictionary video for 'Doctor' (category: Medical) and fix the canonical variant.",
+        "Confirm it is ONE hand and STATIC, and captureable as a still frame.",
+        "If the sign is actually dynamic, leave it disabled and move it to excluded_signs.",
+        "Only then set enabled=true, collect data, and retrain."
+      ]
+    },
+    {
+      "id": "wait",
+      "label_en": "Wait",
+      "text_hi": "प्रतीक्षा करें",
+      "text_en": "Wait",
+      "sign_type": "static_single_hand",
+      "validation_status": "needs_review",
+      "source_url": "https://divyangjan.depwd.gov.in/islrtc/search.php?search=Wait",
+      "validator": "not yet reviewed",
+      "notes": "Candidate for a queue or counter. Deliberately DISABLED until an interpreter confirms the one-hand static form.",
+      "enabled": false,
+      "type_evidence": "Listed as a static sign in the gesture inventory of the open-source ISL real-time translator (2024ucp1505/ISL-RealTime-Translator), which separates its vocabulary into static and dynamic classes. This is a secondary source and is not sufficient on its own.",
+      "type_confidence": "low",
+      "dictionary_category": "Everyday",
+      "variants_available": true,
+      "verification_checklist": [
+        "Watch the ISL Dictionary video for 'Wait' and fix the canonical variant.",
+        "Confirm ONE hand and STATIC - a repeated or swaying motion disqualifies it for this model.",
+        "Only then set enabled=true, collect data, and retrain."
+      ]
+    },
+    {
+      "id": "police",
+      "label_en": "Police",
+      "text_hi": "पुलिस",
+      "text_en": "Police",
+      "sign_type": "static_single_hand",
+      "validation_status": "needs_review",
+      "source_url": "https://divyangjan.depwd.gov.in/islrtc/search.php?search=Police",
+      "validator": "not yet reviewed",
+      "notes": "Candidate for a public-service counter. Deliberately DISABLED until an interpreter confirms the one-hand static form.",
+      "enabled": false,
+      "type_evidence": "Listed as a static sign in the gesture inventory of 2024ucp1505/ISL-RealTime-Translator. Secondary source; not sufficient on its own.",
+      "type_confidence": "low",
+      "dictionary_category": "Everyday",
+      "variants_available": true,
+      "verification_checklist": [
+        "Watch the ISL Dictionary video for 'Police' and fix the canonical variant.",
+        "Confirm ONE hand and STATIC.",
+        "Only then set enabled=true, collect data, and retrain."
+      ]
+    },
+    {
+      "id": "water",
+      "label_en": "Water",
+      "text_hi": "पानी",
+      "text_en": "Water",
+      "sign_type": "static_single_hand",
+      "validation_status": "needs_review",
+      "source_url": "https://divyangjan.depwd.gov.in/islrtc/search.php?search=Water",
+      "validator": "not yet reviewed",
+      "notes": "Candidate for a hospital or reception desk. Deliberately DISABLED. Extra caution needed: the documented form places the thumb tip against the mouth, which is a place of articulation that a webcam-facing camera often cannot see.",
+      "enabled": false,
+      "type_evidence": "The People's Linguistic Survey of India describes WATER as: 'The tip of the thumb of the right thumbs-up shaped hand touches the mouth.' That is a single hand and a single, holdable handshape, but the thumb-to-mouth contact is a place of articulation that is frequently occluded for a face-on camera.",
+      "type_confidence": "low",
+      "dictionary_category": "Everyday",
+      "variants_available": true,
+      "verification_checklist": [
+        "Watch the ISL Dictionary video for 'Water' and fix the canonical variant.",
+        "Confirm ONE hand and STATIC, and that the handshape stays visible to a front-facing camera.",
+        "If the thumb-to-mouth contact is required, verify that MediaPipe still tracks the hand reliably.",
+        "Only then set enabled=true, collect data, and retrain."
+      ]
+    },
+    {
+      "id": "hello",
+      "label_en": "Hello",
+      "text_hi": "नमस्ते",
+      "text_en": "Hello",
+      "sign_type": "static_single_hand",
+      "validation_status": "needs_review",
+      "source_url": "https://divyangjan.depwd.gov.in/islrtc/search.php?search=Hello",
+      "validator": "not yet reviewed",
+      "notes": "Candidate greeting. Deliberately DISABLED: the common ISL greeting involves a waving motion, which would make it dynamic.",
+      "enabled": false,
+      "type_evidence": "Listed as static in 2024ucp1505/ISL-RealTime-Translator, but the everyday greeting is widely produced with a wave-like motion, which would make it a moving sign. Sources conflict, so a human must check the actual dictionary video.",
+      "type_confidence": "low",
+      "dictionary_category": "Everyday",
+      "variants_available": true,
+      "verification_checklist": [
+        "Watch the ISL Dictionary video for 'Hello'. If the canonical form waves or repeats, it is dynamic - leave disabled.",
+        "If a genuinely static variant exists, fix it and record which one.",
+        "Only then set enabled=true, collect data, and retrain."
+      ]
+    }
+  ],
+  "excluded_signs": [
+    {
+      "id": "help",
+      "label_en": "Help",
+      "text_hi": "मदद",
+      "text_en": "Help",
+      "reason": "Directional sign. Zeshan (2003) and the People's Linguistic Survey of India both describe HELP as a sign whose meaning depends on movement direction: it means 'I help you' when it moves from the signer toward the addressee and 'you help me' when it moves the other way. A static frame cannot distinguish the two, so this model would learn an arbitrary meaning.",
+      "source_url": "https://divyangjan.depwd.gov.in/islrtc/search.php?search=Help"
+    },
+    {
+      "id": "yes",
+      "label_en": "Yes",
+      "text_hi": "हाँ",
+      "text_en": "Yes",
+      "reason": "No manual component at all. Zeshan (2003): 'the sign Yes is signed by vertical head nod and it has no manual component.' A hand-landmark model literally cannot see it.",
+      "source_url": "https://divyangjan.depwd.gov.in/islrtc/search.php?search=Yes"
+    },
+    {
+      "id": "thank_you",
+      "label_en": "Thank you",
+      "text_hi": "धन्यवाद",
+      "text_en": "Thank you",
+      "reason": "Dynamic. Classified as a dynamic gesture in the open-source ISL real-time translator gesture inventory.",
+      "source_url": "https://divyangjan.depwd.gov.in/islrtc/search.php?search=Thank%20you"
+    },
+    {
+      "id": "money",
+      "label_en": "Money",
+      "text_hi": "पैसा",
+      "text_en": "Money",
+      "reason": "Dynamic. Classified as a dynamic gesture in the open-source ISL real-time translator gesture inventory.",
+      "source_url": "https://divyangjan.depwd.gov.in/islrtc/search.php?search=Money"
+    },
+    {
+      "id": "pain",
+      "label_en": "Pain",
+      "text_hi": "दर्द",
+      "text_en": "Pain",
+      "reason": "Dynamic. Das et al. (PMC7378574) document 'pain' as one of the emergency words and state that all emergency words except 'doctor' are dynamic hand gestures.",
+      "source_url": "https://divyangjan.depwd.gov.in/islrtc/search.php?search=Pain"
+    },
+    {
+      "id": "accident",
+      "label_en": "Accident",
+      "text_hi": "दुर्घटना",
+      "text_en": "Accident",
+      "reason": "Dynamic. Das et al. (PMC7378574) document 'accident' as a dynamic emergency gesture.",
+      "source_url": "https://divyangjan.depwd.gov.in/islrtc/search.php?search=Accident"
+    },
+    {
+      "id": "allergy",
+      "label_en": "Allergy",
+      "text_hi": "एलर्जी",
+      "text_en": "Allergy",
+      "reason": "Dynamic. Classified as a dynamic gesture in the open-source ISL real-time translator gesture inventory.",
+      "source_url": "https://divyangjan.depwd.gov.in/islrtc/search.php?search=Allergy"
+    },
+    {
+      "id": "call",
+      "label_en": "Call",
+      "text_hi": "बुलाना",
+      "text_en": "Call",
+      "reason": "Dynamic. Das et al. (PMC7378574) document 'call' as a dynamic emergency gesture.",
+      "source_url": "https://divyangjan.depwd.gov.in/islrtc/search.php?search=Call"
+    },
+    {
+      "id": "hot",
+      "label_en": "Hot",
+      "text_hi": "गर्म",
+      "text_en": "Hot",
+      "reason": "Dynamic. Das et al. (PMC7378574) document 'hot' as a dynamic emergency gesture.",
+      "source_url": "https://divyangjan.depwd.gov.in/islrtc/search.php?search=Hot"
+    },
+    {
+      "id": "lose",
+      "label_en": "Lose",
+      "text_hi": "हारना",
+      "text_en": "Lose",
+      "reason": "Dynamic. Das et al. (PMC7378574) document 'lose' as a dynamic emergency gesture.",
+      "source_url": "https://divyangjan.depwd.gov.in/islrtc/search.php?search=Lose"
+    },
+    {
+      "id": "thief",
+      "label_en": "Thief",
+      "text_hi": "चोर",
+      "text_en": "Thief",
+      "reason": "Dynamic. Das et al. (PMC7378574) document 'thief' as a dynamic emergency gesture.",
+      "source_url": "https://divyangjan.depwd.gov.in/islrtc/search.php?search=Thief"
+    }
+  ],
+  "staff_phrases": [
+    {"id": "greet", "text_hi": "मैं आपकी कैसे सहायता कर सकता/सकती हूँ?", "text_en": "How can I help you?"},
+    {"id": "wait", "text_hi": "कृपया थोड़ा इंतज़ार करें।", "text_en": "Please wait a moment."},
+    {"id": "sit", "text_hi": "कृपया यहाँ बैठें।", "text_en": "Please sit here."},
+    {"id": "docs", "text_hi": "कृपया अपने दस्तावेज़ दिखाएँ।", "text_en": "Please show your documents."},
+    {"id": "write", "text_hi": "कृपया इसे लिखकर बताएँ।", "text_en": "Please write it down."},
+    {"id": "interp", "text_hi": "क्या आपको सांकेतिक भाषा दुभाषिए की आवश्यकता है?", "text_en": "Do you need a sign language interpreter?"},
+    {"id": "counter", "text_hi": "कृपया अगले काउंटर पर जाएँ।", "text_en": "Please go to the next counter."},
+    {"id": "check", "text_hi": "क्या मैंने सही समझा?", "text_en": "Did I understand correctly?"},
+    {"id": "thanks", "text_hi": "धन्यवाद।", "text_en": "Thank you."}
+  ]
+}
