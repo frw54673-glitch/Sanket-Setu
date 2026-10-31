@@ -453,7 +453,14 @@ def recognize_frame(payload: RecognizeFrameRequest):
     except ValueError as exc:
         raise HTTPException(status_code=400, detail=str(exc))
 
-    detector = HandDetector(min_confidence=0.45, static_image_mode=True)
+    try:
+        detector = HandDetector(min_confidence=0.45, static_image_mode=True)
+    except Exception as exc:
+        return {
+            "status": "error",
+            "message": "Hand tracking requires MediaPipe (installed locally). On serverless, use /api/recognize/landmarks.",
+            "detail": str(exc),
+        }
     try:
         detection = _detect_frame(detector, frame)
     finally:
@@ -560,7 +567,14 @@ async def recognize_image_file(file: UploadFile = File(...), engine: Literal["ml
     if frame is None:
         raise HTTPException(status_code=400, detail="Invalid image file.")
 
-    detector = HandDetector(min_confidence=0.45, static_image_mode=True)
+    try:
+        detector = HandDetector(min_confidence=0.45, static_image_mode=True)
+    except Exception as exc:
+        return {
+            "status": "error",
+            "message": "Hand tracking requires MediaPipe (installed locally). On serverless, use /api/recognize/landmarks.",
+            "detail": str(exc),
+        }
     try:
         detection = _detect_frame(detector, frame)
     finally:
